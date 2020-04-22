@@ -7,71 +7,85 @@ questions:
   description: "Zookeeper image name"
   type: string
   label: Zookeeper Image Name
+  group: "Image Setting"
 - variable: cp-zookeeper.imageTag
   default: "5.3.0"
   description: "Zookeeper image tag"
   type: string
   label: Zookeeper Image Tag
+  group: "Image Setting"
 - variable: cp-kafka.image
   default: "ranchercharts/confluentinc-cp-kafka"
   description: "Kafka image name"
   type: string
   label: Kafka Image Name
+  group: "Image Setting"
 - variable: cp-kafka.imageTag
   default: "5.3.0"
   description: "Kafka image tag"
   type: string
   label: Kafka Image Tag
+  group: "Image Setting"
 - variable: cp-schema-registry.image
   default: "confluentinc/cp-schema-registry"
   description: "Kafka Schema-Registry image name"
   type: string
   label: Kafka Schema-Registry Image Name
+  group: "Image Setting"
 - variable: cp-schema-registry.imageTag
   default: "5.3.0"
   description: "Kafka schema registry image tag"
   type: string
   label: Kafka schema registry Image Tag
+  group: "Image Setting"
 - variable: cp-kafka-rest.image
   default: "ranchercharts/confluentinc-cp-kafka-rest"
   description: "Kafka rest image name"
   type: string
   label: Kafka REST Image Name
+  group: "Image Setting"
 - variable: cp-kafka-rest.imageTag
   default: "5.3.0"
   description: "Kafka rest image tag"
   type: string
   label: Kafka REST Image Tag
+  group: "Image Setting"
 - variable: cp-kafka-connect.image
   default: "ranchercharts/confluentinc-cp-kafka-connect"
   description: "Kafka connect image name"
   type: string
   label: Kafka Connect Image Name
+  group: "Image Setting"
 - variable: cp-kafka-connect.imageTag
   default: "5.3.0"
   description: "Kafka connect image tag"
   type: string
   label: Kafka Connect Image Tag
+  group: "Image Setting"
 - variable: cp-ksql-server.image
   default: "ranchercharts/confluentinc-cp-ksql-server"
   description: "Kafka KSQL server image name"
   type: string
   label: Kafka KSQL server Image Name
+  group: "Image Setting"
 - variable: cp-ksql-server.imageTag
   default: "5.3.0"
   description: "Kafka KSQL server image tag"
   type: string
   label: Kafka KSQL server Image Tag
+  group: "Image Setting"
 - variable: kafka-topics-ui.image.repository
   default: "ranchercharts/landoop-kafka-topics-ui"
   description: "Kafka topic ui image name"
   type: string
   label: Kafka Topic UI Image Name
+  group: "Image Setting"
 - variable: kafka-topics-ui.image.tag
   default: "latest"
   description: "Kafka topic ui image tag"
   type: string
   label: Kafka Topic UI Image Tag
+  group: "Image Setting"
 - variable: global.enterprise
   default: false
   description: "Enable Confluent enterprise platform, free 30 days trail https://www.confluent.io/download/"
