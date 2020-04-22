@@ -2,6 +2,7 @@ labels:
   io.cattle.role: project # options are cluster/project
   io.rancher.app_min_version: 0.8.0
 questions:
+# Image Configurations
 - variable: cp-zookeeper.image
   default: "ranchercharts/confluentinc-cp-zookeeper"
   description: "Zookeeper image name"
@@ -86,6 +87,7 @@ questions:
   type: string
   label: Kafka Topic UI Image Tag
   group: "Image Setting"
+# Control Center Configurations
 - variable: global.enterprise
   default: false
   description: "Enable Confluent enterprise platform, free 30 days trail https://www.confluent.io/download/"
@@ -104,6 +106,7 @@ questions:
     description: "Control Center image tag"
     type: string
     label: Control Center Image Tag
+# Kafka Configurations
 - variable: cp-kafka.replicas
   default: 3
   description: "Replicas of Kafka Brokers"
@@ -186,3 +189,22 @@ questions:
     show_if: "kafka-topics-ui.enabled=true&&kafka-topics-ui.ingress.enabled=true&&global.enterprise=false"
     required: true
     label: Layer 7 Load Balancer Hostname
+# Prometheus Configurations
+- variable: prometheus.enabled
+  default: false
+  description: "Enable Prometheus Exporter"
+  type: boolean
+  label: Enable Prometheus Exporter
+  show_subquestion_if: true
+  group: "Prometheus Settings"
+  subquestions:
+  - variable: prometheus.image
+    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
+    description: "Prometheus image name"
+    type: string
+    label: Prometheus Image Name
+  - variable: prometheus.imageTag
+    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
+    description: "Prometheus tag"
+    type: string
+    label: Prometheus Tag
