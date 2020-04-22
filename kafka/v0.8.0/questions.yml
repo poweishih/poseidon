@@ -26,18 +26,18 @@ questions:
     description: "Enable Prometheus Exporter"
     type: boolean
     label: Enable Prometheus Exporter
-    show_subquestion_if: true
-    subquestions:
-    - variable: cp-control-center.prometheus.jmx.image
-      default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-      description: "Prometheus image name"
-      type: string
-      label: Prometheus Image Name
-    - variable: cp-control-center.prometheus.jmx.imageTag
-      default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-      description: "Prometheus tag"
-      type: string
-      label: Prometheus Tag
+  - variable: cp-control-center.prometheus.jmx.image
+    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
+    description: "Prometheus image name"
+    type: string
+    label: Prometheus Image Name
+    show_if: "cp-control-center.prometheus.jmx.enabled=true"
+  - variable: cp-control-center.prometheus.jmx.imageTag
+    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
+    description: "Prometheus tag"
+    type: string
+    label: Prometheus Tag
+    show_if: "cp-control-center.prometheus.jmx.enabled=true"
 # Kafka Configurations
 - variable: cp-kafka.replicas
   default: 3
@@ -150,7 +150,7 @@ questions:
   show_subquestion_if: true
   group: "Kafka Connect Settings"
   subquestions:
-  - variable: cp-kafka-connect-rest.prometheus.jmx.image
+  - variable: cp-kafka-connect.prometheus.jmx.image
     default: "solsson/kafka-prometheus-jmx-exporter@sha256"
     description: "Prometheus image name"
     type: string
