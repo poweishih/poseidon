@@ -2,91 +2,6 @@ labels:
   io.cattle.role: project # options are cluster/project
   io.rancher.app_min_version: 0.8.0
 questions:
-# Image Configurations
-- variable: cp-zookeeper.image
-  default: "ranchercharts/confluentinc-cp-zookeeper"
-  description: "Zookeeper image name"
-  type: string
-  label: Zookeeper Image Name
-  group: "Image Setting"
-- variable: cp-zookeeper.imageTag
-  default: "5.3.0"
-  description: "Zookeeper image tag"
-  type: string
-  label: Zookeeper Image Tag
-  group: "Image Setting"
-- variable: cp-kafka.image
-  default: "ranchercharts/confluentinc-cp-kafka"
-  description: "Kafka image name"
-  type: string
-  label: Kafka Image Name
-  group: "Image Setting"
-- variable: cp-kafka.imageTag
-  default: "5.3.0"
-  description: "Kafka image tag"
-  type: string
-  label: Kafka Image Tag
-  group: "Image Setting"
-- variable: cp-schema-registry.image
-  default: "confluentinc/cp-schema-registry"
-  description: "Kafka Schema-Registry image name"
-  type: string
-  label: Kafka Schema-Registry Image Name
-  group: "Image Setting"
-- variable: cp-schema-registry.imageTag
-  default: "5.3.0"
-  description: "Kafka schema registry image tag"
-  type: string
-  label: Kafka schema registry Image Tag
-  group: "Image Setting"
-- variable: cp-kafka-rest.image
-  default: "ranchercharts/confluentinc-cp-kafka-rest"
-  description: "Kafka rest image name"
-  type: string
-  label: Kafka REST Image Name
-  group: "Image Setting"
-- variable: cp-kafka-rest.imageTag
-  default: "5.3.0"
-  description: "Kafka rest image tag"
-  type: string
-  label: Kafka REST Image Tag
-  group: "Image Setting"
-- variable: cp-kafka-connect.image
-  default: "ranchercharts/confluentinc-cp-kafka-connect"
-  description: "Kafka connect image name"
-  type: string
-  label: Kafka Connect Image Name
-  group: "Image Setting"
-- variable: cp-kafka-connect.imageTag
-  default: "5.3.0"
-  description: "Kafka connect image tag"
-  type: string
-  label: Kafka Connect Image Tag
-  group: "Image Setting"
-- variable: cp-ksql-server.image
-  default: "ranchercharts/confluentinc-cp-ksql-server"
-  description: "Kafka KSQL server image name"
-  type: string
-  label: Kafka KSQL server Image Name
-  group: "Image Setting"
-- variable: cp-ksql-server.imageTag
-  default: "5.3.0"
-  description: "Kafka KSQL server image tag"
-  type: string
-  label: Kafka KSQL server Image Tag
-  group: "Image Setting"
-- variable: kafka-topics-ui.image.repository
-  default: "ranchercharts/landoop-kafka-topics-ui"
-  description: "Kafka topic ui image name"
-  type: string
-  label: Kafka Topic UI Image Name
-  group: "Image Setting"
-- variable: kafka-topics-ui.image.tag
-  default: "latest"
-  description: "Kafka topic ui image tag"
-  type: string
-  label: Kafka Topic UI Image Tag
-  group: "Image Setting"
 # Control Center Configurations
 - variable: global.enterprise
   default: false
@@ -135,6 +50,73 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Kafka
+- variable: cp-kafka.image
+  default: "ranchercharts/confluentinc-cp-kafka"
+  description: "Kafka image name"
+  type: string
+  label: Kafka Image Name
+  group: "Kafka Settings"
+- variable: cp-kafka.imageTag
+  default: "5.3.0"
+  description: "Kafka image tag"
+  type: string
+  label: Kafka Image Tag
+  group: "Kafka Settings"
+- variable: cp-kafka.prometheus.jmx.enabled
+  default: false
+  description: "Enable Prometheus Exporter"
+  type: boolean
+  label: Enable Prometheus Exporter
+  show_subquestion_if: true
+  group: "Kafka Settings"
+  subquestions:
+  - variable: prometheus.jmx.image
+    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
+    description: "Prometheus image name"
+    type: string
+    label: Prometheus Image Name
+  - variable: prometheus.jmx.imageTag
+    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
+    description: "Prometheus tag"
+    type: string
+    label: Prometheus Tag
+# Kafka system Configurations
+- variable: cp-kafka-rest.image
+  default: "ranchercharts/confluentinc-cp-kafka-rest"
+  description: "Kafka rest image name"
+  type: string
+  label: Kafka REST Image Name
+  group: "Kafka System Settings"
+- variable: cp-kafka-rest.imageTag
+  default: "5.3.0"
+  description: "Kafka rest image tag"
+  type: string
+  label: Kafka REST Image Tag
+  group: "Kafka System Settings"
+- variable: cp-kafka-connect.image
+  default: "ranchercharts/confluentinc-cp-kafka-connect"
+  description: "Kafka connect image name"
+  type: string
+  label: Kafka Connect Image Name
+  group: "Kafka System Settings"
+- variable: cp-kafka-connect.imageTag
+  default: "5.3.0"
+  description: "Kafka connect image tag"
+  type: string
+  label: Kafka Connect Image Tag
+  group: "Kafka System Settings"
+- variable: cp-ksql-server.image
+  default: "ranchercharts/confluentinc-cp-ksql-server"
+  description: "Kafka KSQL server image name"
+  type: string
+  label: Kafka KSQL server Image Name
+  group: "Kafka System Settings"
+- variable: cp-ksql-server.imageTag
+  default: "5.3.0"
+  description: "Kafka KSQL server image tag"
+  type: string
+  label: Kafka KSQL server Image Tag
+  group: "Kafka System Settings"
 # Zookeeper Configurations
 - variable: cp-zookeeper.persistence.enabled
   default: false
@@ -165,6 +147,31 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Zookeeper Data Log
+- variable: cp-zookeeper.image
+  default: "ranchercharts/confluentinc-cp-zookeeper"
+  description: "Zookeeper image name"
+  type: string
+  label: Zookeeper Image Name
+  group: "Zookeeper Settings"
+- variable: cp-zookeeper.imageTag
+  default: "5.3.0"
+  description: "Zookeeper image tag"
+  type: string
+  label: Zookeeper Image Tag
+  group: "Zookeeper Settings"
+# Schema Registry Configurations
+- variable: cp-schema-registry.image
+  default: "confluentinc/cp-schema-registry"
+  description: "Kafka Schema-Registry image name"
+  type: string
+  label: Kafka Schema-Registry Image Name
+  group: "Schema Registry Settings"
+- variable: cp-schema-registry.imageTag
+  default: "5.3.0"
+  description: "Kafka schema registry image tag"
+  type: string
+  label: Kafka schema registry Image Tag
+  group: "Schema Registry Settings"
 # kafka-Topics-UI Configurations
 - variable: kafka-topics-ui.enabled
   default: true
@@ -189,22 +196,34 @@ questions:
     show_if: "kafka-topics-ui.enabled=true&&kafka-topics-ui.ingress.enabled=true&&global.enterprise=false"
     required: true
     label: Layer 7 Load Balancer Hostname
+- variable: kafka-topics-ui.image.repository
+  default: "ranchercharts/landoop-kafka-topics-ui"
+  description: "Kafka topic ui image name"
+  type: string
+  label: Kafka Topic UI Image Name
+  group: "Kafka Topics UI"
+- variable: kafka-topics-ui.image.tag
+  default: "latest"
+  description: "Kafka topic ui image tag"
+  type: string
+  label: Kafka Topic UI Image Tag
+  group: "Kafka Topics UI"
 # Prometheus Configurations
-- variable: prometheus.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  show_subquestion_if: true
-  group: "Prometheus Settings"
-  subquestions:
-  - variable: prometheus.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: prometheus.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
+# - variable: prometheus.enabled
+#   default: false
+#   description: "Enable Prometheus Exporter"
+#   type: boolean
+#   label: Enable Prometheus Exporter
+#   show_subquestion_if: true
+#   group: "Prometheus Settings"
+#   subquestions:
+#   - variable: prometheus.image
+#     default: "solsson/kafka-prometheus-jmx-exporter@sha256"
+#     description: "Prometheus image name"
+#     type: string
+#     label: Prometheus Image Name
+#   - variable: prometheus.imageTag
+#     default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
+#     description: "Prometheus tag"
+#     type: string
+#     label: Prometheus Tag
