@@ -295,9 +295,11 @@ portal:
   ## Additional deployment annotations
   podAnnotations: {}
 
+privateRegistry: "10.134.200.110:5000"
+
 core:
   image:
-    repository: ranchercharts/goharbor-harbor-core
+    repository: ${privateRegistry}/ranchercharts/goharbor-harbor-core
     tag: v1.9.1
   replicas: 1
 # resources:
