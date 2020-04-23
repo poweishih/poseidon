@@ -18,21 +18,25 @@ spec:
       labels:
         app: {{ template "cp-kafka-connect.name" . }}
         release: {{ .Release.Name }}
-      {{- if or .Values.podAnnotations .Values.prometheus.jmx.enabled }}
+      {{- if or .Values.podAnnotations .Values.global.prometheus.jmx.enabled }}
       annotations:
       {{- range $key, $value := .Values.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
       {{- end }}
-      {{- if .Values.prometheus.jmx.enabled }}
+      {{- if .Values.global.prometheus.jmx.enabled }}
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ .Values.prometheus.jmx.port | quote }}
       {{- end }}
       {{- end }}
     spec:
       containers:
-        {{- if .Values.prometheus.jmx.enabled }}
+        {{- if .Values.global.prometheus.jmx.enabled }}
         - name: prometheus-jmx-exporter
+          {{- if .Values.global.private_registry.enabled }}
+          image: "{{ .Values.global.private_registry.path }}/{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
+          {{- else }}
           image: "{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
+          {{- end }}
           imagePullPolicy: "{{ .Values.prometheus.jmx.imagePullPolicy }}"
           command:
           - java
@@ -53,13 +57,17 @@ spec:
             mountPath: /etc/jmx-kafka-connect
         {{- end }}
         - name: {{ template "cp-kafka-connect.name" . }}-server
+          {{- if .Values.global.private_registry.enabled }}
+          image: "{{ .Values.global.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
+          {{- else }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+          {{- end }}
           imagePullPolicy: "{{ .Values.imagePullPolicy }}"
           ports:
             - name: kafka-connect
               containerPort: {{ .Values.servicePort}}
               protocol: TCP
-            {{- if .Values.prometheus.jmx.enabled }}
+            {{- if .Values.global.prometheus.jmx.enabled }}
             - containerPort: {{ .Values.jmx.port }}
               name: jmx
             {{- end }}
@@ -103,7 +111,7 @@ spec:
 {{ toYaml .Values.imagePullSecrets | indent 8 }}
       {{- end }}
       volumes:
-      {{- if .Values.prometheus.jmx.enabled }}
+      {{- if .Values.global.prometheus.jmx.enabled }}
       - name: jmx-config
         configMap:
           name: {{ template "cp-kafka-connect.fullname" . }}-jmx-configmap

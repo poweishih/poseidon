@@ -81,24 +81,6 @@ questions:
   type: string
   label: Kafka REST Image Tag
   group: "Kafka REST Settings"
-- variable: cp-kafka-rest.prometheus.jmx.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  show_subquestion_if: true
-  group: "Kafka REST Settings"
-  subquestions:
-  - variable: cp-kafka-rest.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: cp-kafka-rest.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
 # # Kafka connect
 - variable: cp-kafka-connect.image
   default: "ranchercharts/confluentinc-cp-kafka-connect"
@@ -112,24 +94,6 @@ questions:
   type: string
   label: Kafka Connect Image Tag
   group: "Kafka Connect Settings"
-- variable: cp-kafka-connect.prometheus.jmx.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  show_subquestion_if: true
-  group: "Kafka Connect Settings"
-  subquestions:
-  - variable: cp-kafka-connect.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: cp-kafka-connect.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
 # # Kafka KSQL server
 - variable: cp-ksql-server.image
   default: "ranchercharts/confluentinc-cp-ksql-server"
@@ -143,24 +107,6 @@ questions:
   type: string
   label: Kafka KSQL server Image Tag
   group: "Kafka KSQL Server Settings"
-- variable: cp-ksql-server.prometheus.jmx.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  show_subquestion_if: true
-  group: "Kafka KSQL Server Settings"
-  subquestions:
-  - variable: cp-ksql-server.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: cp-ksql-server.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
 # Zookeeper Configurations
 - variable: cp-zookeeper.persistence.enabled
   default: false
@@ -203,24 +149,6 @@ questions:
   type: string
   label: Zookeeper Image Tag
   group: "Zookeeper Settings"
-- variable: cp-zookeeper.prometheus.jmx.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  show_subquestion_if: true
-  group: "Zookeeper Settings"
-  subquestions:
-  - variable: cp-zookeeper.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: cp-zookeeper.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
 # Schema Registry Configurations
 - variable: cp-schema-registry.image
   default: "confluentinc/cp-schema-registry"
@@ -234,24 +162,6 @@ questions:
   type: string
   label: Kafka schema registry Image Tag
   group: "Schema Registry Settings"
-- variable: cp-schema-registry.prometheus.jmx.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  show_subquestion_if: true
-  group: "Schema Registry Settings"
-  subquestions:
-  - variable: cp-schema-registry.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: cp-schema-registry.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
 # kafka-Topics-UI Configurations
 - variable: kafka-topics-ui.enabled
   default: true
