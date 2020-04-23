@@ -67,46 +67,6 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Kafka
-# Kafka system Configurations
-# # Kafka REST
-- variable: cp-kafka-rest.image
-  default: "ranchercharts/confluentinc-cp-kafka-rest"
-  description: "Kafka rest image name"
-  type: string
-  label: Kafka REST Image Name
-  group: "Kafka REST Settings"
-- variable: cp-kafka-rest.imageTag
-  default: "5.3.0"
-  description: "Kafka rest image tag"
-  type: string
-  label: Kafka REST Image Tag
-  group: "Kafka REST Settings"
-# # Kafka connect
-- variable: cp-kafka-connect.image
-  default: "ranchercharts/confluentinc-cp-kafka-connect"
-  description: "Kafka connect image name"
-  type: string
-  label: Kafka Connect Image Name
-  group: "Kafka Connect Settings"
-- variable: cp-kafka-connect.imageTag
-  default: "5.3.0"
-  description: "Kafka connect image tag"
-  type: string
-  label: Kafka Connect Image Tag
-  group: "Kafka Connect Settings"
-# # Kafka KSQL server
-- variable: cp-ksql-server.image
-  default: "ranchercharts/confluentinc-cp-ksql-server"
-  description: "Kafka KSQL server image name"
-  type: string
-  label: Kafka KSQL server Image Name
-  group: "Kafka KSQL Server Settings"
-- variable: cp-ksql-server.imageTag
-  default: "5.3.0"
-  description: "Kafka KSQL server image tag"
-  type: string
-  label: Kafka KSQL server Image Tag
-  group: "Kafka KSQL Server Settings"
 # Zookeeper Configurations
 - variable: cp-zookeeper.persistence.enabled
   default: false
@@ -137,31 +97,6 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Zookeeper Data Log
-- variable: cp-zookeeper.image
-  default: "ranchercharts/confluentinc-cp-zookeeper"
-  description: "Zookeeper image name"
-  type: string
-  label: Zookeeper Image Name
-  group: "Zookeeper Settings"
-- variable: cp-zookeeper.imageTag
-  default: "5.3.0"
-  description: "Zookeeper image tag"
-  type: string
-  label: Zookeeper Image Tag
-  group: "Zookeeper Settings"
-# Schema Registry Configurations
-- variable: cp-schema-registry.image
-  default: "confluentinc/cp-schema-registry"
-  description: "Kafka Schema-Registry image name"
-  type: string
-  label: Kafka Schema-Registry Image Name
-  group: "Schema Registry Settings"
-- variable: cp-schema-registry.imageTag
-  default: "5.3.0"
-  description: "Kafka schema registry image tag"
-  type: string
-  label: Kafka schema registry Image Tag
-  group: "Schema Registry Settings"
 # kafka-Topics-UI Configurations
 - variable: kafka-topics-ui.enabled
   default: true
@@ -186,17 +121,3 @@ questions:
     show_if: "kafka-topics-ui.enabled=true&&kafka-topics-ui.ingress.enabled=true&&global.enterprise=false"
     required: true
     label: Layer 7 Load Balancer Hostname
-- variable: kafka-topics-ui.image.repository
-  default: "ranchercharts/landoop-kafka-topics-ui"
-  description: "Kafka topic ui image name"
-  type: string
-  label: Kafka Topic UI Image Name
-  group: "Kafka Topics UI"
-  show_if: "global.enterprise=false"
-- variable: kafka-topics-ui.image.tag
-  default: "latest"
-  description: "Kafka topic ui image tag"
-  type: string
-  label: Kafka Topic UI Image Tag
-  group: "Kafka Topics UI"
-  show_if: "global.enterprise=false"
