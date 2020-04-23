@@ -22,12 +22,12 @@ spec:
       labels:
         app: {{ template "cp-kafka.name" . }}
         release: {{ .Release.Name }}
-      {{- if or .Values.podAnnotations .Values.prometheus.jmx.enabled }}
+      {{- if or .Values.podAnnotations .Values.global.prometheus.jmx.enabled }}
       annotations:
       {{- range $key, $value := .Values.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
       {{- end }}
-      {{- if .Values.prometheus.jmx.enabled }}
+      {{- if .Values.global.prometheus.jmx.enabled }}
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ .Values.prometheus.jmx.port | quote }}
       {{- end }}
@@ -50,10 +50,10 @@ spec:
                     - {{ .Release.Name }}
               topologyKey: "kubernetes.io/hostname"
       containers:
-      {{- if .Values.prometheus.jmx.enabled }}
+      {{- if .Values.global.prometheus.jmx.enabled }}
       - name: prometheus-jmx-exporter
-        {{- if .Values.private_registry.enabled }}
-        image: "{{ .Values.private_registry.path }}/{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
+        {{- if .Values.global.private_registry.enabled }}
+        image: "{{ .Values.global.private_registry.path }}/{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
         {{- else }}
         image: "{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
         {{- end }}
@@ -78,14 +78,14 @@ spec:
       {{- end }}
       - name: {{ template "cp-kafka.name" . }}-broker
 {{- if .Values.global.enterprise }}
-        {{- if .Values.private_registry.enabled }}
-        image: "{{ .Values.private_registry.path }}/{{ .Values.enterpriseImage }}:{{ .Values.imageTag }}"
+        {{- if .Values.global.private_registry.enabled }}
+        image: "{{ .Values.global.private_registry.path }}/{{ .Values.enterpriseImage }}:{{ .Values.imageTag }}"
         {{- else }}
         image: "{{ .Values.enterpriseImage }}:{{ .Values.imageTag }}"
         {{- end }}
 {{- else }}
-        {{- if .Values.private_registry.enabled }}
-        image: "{ .Values.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
+        {{- if .Values.global.private_registry.enabled }}
+        image: "{ .Values.global.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
         {{- else }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         {{- end }}
@@ -94,7 +94,7 @@ spec:
         ports:
         - containerPort: 9092
           name: kafka
-        {{- if .Values.prometheus.jmx.enabled }}
+        {{- if .Values.global.prometheus.jmx.enabled }}
         - containerPort: {{ .Values.jmx.port }}
           name: jmx
         {{- end }}
@@ -175,7 +175,7 @@ spec:
       - name: datadir-0
         emptyDir: {}
       {{- end }}
-      {{- if .Values.prometheus.jmx.enabled }}
+      {{- if .Values.global.prometheus.jmx.enabled }}
       - name: jmx-config
         configMap:
           name: {{ template "cp-kafka.fullname" . }}-jmx-configmap
