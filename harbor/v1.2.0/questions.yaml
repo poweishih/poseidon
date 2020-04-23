@@ -30,6 +30,12 @@ questions:
   - "warning"
   - "error"
   - "fatal"
+- variable: privateRegistry
+  required: true
+  default: "info"
+  type: string
+  label: Private Registry
+  group: "Global Options"
 # Harbor Expose Service
 - variable: expose.type
   required: true
@@ -59,7 +65,7 @@ questions:
   group: "Expose Service Options"
   show_if: "expose.type=ingress||expose.type=loadBalancer"
 - variable: externalURL
-  default: "https://harbor.local:30003"
+  default: "http://harbor.{主帳號}.{主機序號}.poseidon.lh-tst-1.mtjade.cloud"
   description: "Set external URL if the Harbor is deployed behind the proxy (format: protocol://domain:port)"
   type: string
   label: The External URL for Harbor Service
@@ -501,19 +507,19 @@ questions:
   label: Enable Clair
   group: "Notary, Clair & Cert"
 - variable: notary.enabled
-  default: true
+  default: false
   description: "Notary is a tool for publishing and managing trusted collections of content like Docker images. Publishers can digitally sign collections and consumers can verify integrity and origin of content"
   type: boolean
   label: Enable Notary
   group: "Notary, Clair & Cert"
 - variable: chartmuseum.enabled
-  default: true
+  default: false
   description: "Enable Chartmuseum to support Helm chart repository in Harbor"
   type: boolean
   label: Enable Helm Chart Repository in Harbor
   group: "Notary, Clair & Cert"
 - variable: cert.enabled
-  default: true
+  default: false
   description: "Enable cert to distribute Harbor CA certs to each node under `/etc/docker/certs.d/` path"
   type: boolean
   label: Enable Cert DaemonSet
