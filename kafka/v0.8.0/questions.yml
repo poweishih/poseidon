@@ -77,36 +77,12 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Kafka
-- variable: cp-kafka.image
-  default: "ranchercharts/confluentinc-cp-kafka"
-  description: "Kafka image name"
-  type: string
-  label: Kafka Image Name
-  group: "Kafka Settings"
-- variable: cp-kafka.imageTag
-  default: "5.3.0"
-  description: "Kafka image tag"
-  type: string
-  label: Kafka Image Tag
-  group: "Kafka Settings"
 - variable: cp-kafka.prometheus.jmx.enabled
   default: false
   description: "Enable Prometheus Exporter"
   type: boolean
   label: Enable Prometheus Exporter
-  show_subquestion_if: true
   group: "Kafka Settings"
-  subquestions:
-  - variable: cp-kafka.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-  - variable: cp-kafka.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
 # Kafka system Configurations
 # # Kafka REST
 - variable: cp-kafka-rest.image
