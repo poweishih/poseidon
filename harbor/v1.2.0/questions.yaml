@@ -32,7 +32,6 @@ questions:
   - "fatal"
 - variable: privateRegistry
   required: true
-  default: "info"
   type: string
   label: Private Registry
   group: "Global Options"
