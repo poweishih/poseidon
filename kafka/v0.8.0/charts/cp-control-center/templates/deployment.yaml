@@ -19,12 +19,12 @@ spec:
       labels:
         app: {{ include "cp-control-center.name" . }}
         release: {{ .Release.Name }}
-      {{- if or .Values.podAnnotations .Values.prometheus.jmx.enabled }}
+      {{- if or .Values.podAnnotations .Values.global.prometheus.jmx.enabled }}
       annotations:
       {{- range $key, $value := .Values.podAnnotations }}
         {{ $key }}: {{ $value | quote }}
       {{- end }}
-      {{- if .Values.prometheus.jmx.enabled }}
+      {{- if .Values.global.prometheus.jmx.enabled }}
         prometheus.io/scrape: "true"
         prometheus.io/port: {{ .Values.prometheus.jmx.port | quote }}
       {{- end }}
@@ -32,7 +32,11 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
+          {{- if .Values.global.private_registry.enabled }}
+          image: "{{ .Values.global.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
+          {{- else }}
           image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.imagePullPolicy }}
           ports:
             - name: cc-http

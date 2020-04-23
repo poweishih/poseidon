@@ -22,7 +22,11 @@ spec:
     spec:
       containers:
         - name: {{ .Chart.Name }}
+          {{- if .Values.global.private_registry.enabled }}
+          image: "{{ .Values.global.private_registry.path }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- else }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          {{- end }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - containerPort: {{ .Values.service.internalPort }}
