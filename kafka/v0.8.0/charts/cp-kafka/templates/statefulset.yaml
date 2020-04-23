@@ -85,7 +85,7 @@ spec:
         {{- end }}
 {{- else }}
         {{- if .Values.global.private_registry.enabled }}
-        image: "{ .Values.global.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
+        image: "{{ .Values.global.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
         {{- else }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
         {{- end }}

@@ -2,6 +2,12 @@ labels:
   io.cattle.role: project # options are cluster/project
   io.rancher.app_min_version: 0.8.0
 questions:
+# Prometheus Exporter
+- variable: global.prometheus.jmx.enabled
+  default: false
+  type: boolean
+  label: Enable Prometheus Exporter
+  group: "Global Settings"
 # Private Registry
 - variable: global.private_registry.enabled
   default: false
@@ -13,12 +19,6 @@ questions:
   - variable: global.private_registry.path
     type: string
     label: Private Registry path
-# Prometheus Exporter
-- variable: global.prometheus.jmx.enabled
-  default: false
-  type: boolean
-  label: Enable Prometheus Exporter
-  group: "Global Settings"
 # Control Center Configurations
 - variable: global.enterprise
   default: false
@@ -38,23 +38,6 @@ questions:
     description: "Control Center image tag"
     type: string
     label: Control Center Image Tag
-  - variable: cp-control-center.prometheus.jmx.enabled
-    default: false
-    description: "Enable Prometheus Exporter"
-    type: boolean
-    label: Enable Prometheus Exporter
-  - variable: cp-control-center.prometheus.jmx.image
-    default: "solsson/kafka-prometheus-jmx-exporter@sha256"
-    description: "Prometheus image name"
-    type: string
-    label: Prometheus Image Name
-    show_if: "cp-control-center.prometheus.jmx.enabled=true"
-  - variable: cp-control-center.prometheus.jmx.imageTag
-    default: "6f82e2b0464f50da8104acd7363fb9b995001ddff77d248379f8788e78946143"
-    description: "Prometheus tag"
-    type: string
-    label: Prometheus Tag
-    show_if: "cp-control-center.prometheus.jmx.enabled=true"
 # Kafka Configurations
 - variable: cp-kafka.replicas
   default: 3
@@ -84,12 +67,6 @@ questions:
     description: "If undefined or null, uses the default StorageClass. Default to null"
     type: storageclass
     label: Default StorageClass for Kafka
-- variable: cp-kafka.prometheus.jmx.enabled
-  default: false
-  description: "Enable Prometheus Exporter"
-  type: boolean
-  label: Enable Prometheus Exporter
-  group: "Kafka Settings"
 # Kafka system Configurations
 # # Kafka REST
 - variable: cp-kafka-rest.image
