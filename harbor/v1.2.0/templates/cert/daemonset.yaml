@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: registry-ca
-        image: busybox:latest
+        image: {{ .Values.privateRegistry }}/busybox:latest
         command: [ 'sh' ]
         args:
           - '-c'
