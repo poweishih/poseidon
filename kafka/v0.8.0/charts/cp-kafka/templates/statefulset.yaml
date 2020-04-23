@@ -52,7 +52,11 @@ spec:
       containers:
       {{- if .Values.prometheus.jmx.enabled }}
       - name: prometheus-jmx-exporter
+        {{- if .Values.private_registry.enabled }}
+        image: "{{ .Values.private_registry.path }}/{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
+        {{- else }}
         image: "{{ .Values.prometheus.jmx.image }}:{{ .Values.prometheus.jmx.imageTag }}"
+        {{- end }}
         imagePullPolicy: "{{ .Values.prometheus.jmx.imagePullPolicy }}"
         command:
         - java
@@ -74,9 +78,17 @@ spec:
       {{- end }}
       - name: {{ template "cp-kafka.name" . }}-broker
 {{- if .Values.global.enterprise }}
+        {{- if .Values.private_registry.enabled }}
+        image: "{{ .Values.private_registry.path }}/{{ .Values.enterpriseImage }}:{{ .Values.imageTag }}"
+        {{- else }}
         image: "{{ .Values.enterpriseImage }}:{{ .Values.imageTag }}"
+        {{- end }}
 {{- else }}
+        {{- if .Values.private_registry.enabled }}
+        image: "{ .Values.private_registry.path }}/{{ .Values.image }}:{{ .Values.imageTag }}"
+        {{- else }}
         image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        {{- end }}
 {{- end }}
         imagePullPolicy: "{{ .Values.imagePullPolicy }}"
         ports:
