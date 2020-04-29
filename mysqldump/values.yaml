@@ -17,7 +17,7 @@ mysql:
   host: "10.43.186.211"
   username: root
   # overriden by existingDbSecret / existingDbSecretKey if set
-  password: "yT6wwMK50d"
+  password: yT6wwMK50d
   port: 3306
   # db for single db backup
   db: mysql
