@@ -5,7 +5,7 @@
 image:
   registry: 10.134.200.110:5000
   repository: 10.134.200.110:5000/monotek/gcloud-mysql
-  tag: "latest"
+  tag: "8"
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images#
@@ -14,16 +14,16 @@ image:
 mysql:
 ## Without a host set, this chart will not do anything as it is expected
 ## to be used only when there's an existing database to backup.
-  host: "10.43.186.211"
+  host: "10.43.126.189"
   username: root
   # overriden by existingDbSecret / existingDbSecretKey if set
-  password: yT6wwMK50d
+  #password: yT6wwMK50d
   port: 3306
   # db for single db backup
   db: mysql
   # Get password from existing secret
-  # existingSecret:
-  # existingSecretKey:
+  existingSecret: mysql
+  existingSecretKey: mysql-root-password
 
 # use --all-databases if enabled
 allDatabases:
