@@ -124,8 +124,9 @@ configurationFilesPath: /etc/mysql/conf.d/
 
 # Custom mysql configuration files used to override default mysql settings
 configurationFiles: {}
-#  mysql.cnf: |-
-#    [mysqld]
+  mysql.cnf: |-
+    [mysqld]
+    default_authentication_plugin=mysql_native_password
 #    skip-name-resolve
 #    ssl-ca=/ssl/ca.pem
 #    ssl-cert=/ssl/server-cert.pem
