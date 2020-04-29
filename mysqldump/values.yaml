@@ -3,8 +3,8 @@
 # Declare variables to be passed into your templates.
 
 image:
-  registry: docker.io
-  repository: monotek/gcloud-mysql
+  registry: 10.134.200.110:5000
+  repository: 10.134.200.110:5000/monotek/gcloud-mysql
   tag: "8"
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
