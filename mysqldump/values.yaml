@@ -14,7 +14,7 @@ image:
 mysql:
 ## Without a host set, this chart will not do anything as it is expected
 ## to be used only when there's an existing database to backup.
-  host: "10.43.126.189"
+  host: "10.43.182.192"
   username: root
   # overriden by existingDbSecret / existingDbSecretKey if set
   #password: yT6wwMK50d
