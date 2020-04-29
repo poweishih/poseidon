@@ -5,7 +5,7 @@
 image:
   registry: 10.134.200.110:5000
   repository: 10.134.200.110:5000/monotek/gcloud-mysql
-  tag: "8"
+  tag: "latest"
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images#
@@ -38,14 +38,14 @@ options: "--opt --single-transaction"
 saveToDirectory: false
 
 # if to dump all databases to stdout when not uploading
-dumpAllToStdout: false
+dumpAllToStdout: true
 
 ## set to `now` to get a one time job, or a cronjob schedule like `0 0 * * *`
 ## to get a cronjob.
 schedule: "* * * * *"
 
 # enable some debug options
-debug: false
+debug: true
 
 # cronjob history
 successfulJobsHistoryLimit: 5
@@ -65,7 +65,7 @@ additionalSteps: []
 # persistentVolumeClaim: <existing-PVC>
 
 persistence:
-  enabled: true
+  enabled: false
   size: 8Gi
   accessMode: ReadWriteOnce
   subPath:
