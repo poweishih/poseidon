@@ -65,7 +65,7 @@ additionalSteps: []
 # persistentVolumeClaim: <existing-PVC>
 
 persistence:
-  enabled: false
+  enabled: true
   size: 8Gi
   accessMode: ReadWriteOnce
   subPath:
