@@ -177,7 +177,7 @@ cp-control-center:
 ## Topic UI
 ## ------------------------------------------------------
 kafka-topics-ui:
-  enabled: true
+  enabled: false
   replicas: 1
   image:
     repository: ranchercharts/landoop-kafka-topics-ui

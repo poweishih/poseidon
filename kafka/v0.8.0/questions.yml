@@ -25,19 +25,7 @@ questions:
   description: "Enable Confluent enterprise platform, free 30 days trail https://www.confluent.io/download/"
   type: boolean
   label: Enable Confluent Enterprise Platform
-  show_subquestion_if: true
   group: "Global Settings"
-  subquestions:
-  - variable: cp-control-center.image
-    default: "confluentinc/cp-enterprise-control-center"
-    description: "Control Center image name"
-    type: string
-    label: Control Center Image Name
-  - variable: cp-control-center.imageTag
-    default: "5.2.0"
-    description: "Control Center image tag"
-    type: string
-    label: Control Center Image Tag
 # Kafka Configurations
 - variable: cp-kafka.replicas
   default: 3
@@ -99,7 +87,7 @@ questions:
     label: Default StorageClass for Zookeeper Data Log
 # kafka-Topics-UI Configurations
 - variable: kafka-topics-ui.enabled
-  default: true
+  default: false
   description: "Enable kafka topics ui dashboard"
   type: boolean
   label: Enable Kafka Topics UI Dashboard
