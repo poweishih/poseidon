@@ -11,7 +11,7 @@
 image:
   ## Bitnami MongoDB registry
   ##
-  registry: docker.io
+  registry: 
   ## Bitnami MongoDB image name
   ##
   repository: ranchercharts/bitnami-mongodb
