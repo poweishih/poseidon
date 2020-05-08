@@ -11,14 +11,14 @@
 image:
   ## Bitnami MongoDB registry
   ##
-  registry: bitnami/mongodb
+  registry: 
   ## Bitnami MongoDB image name
   ##
-  repository: ranchercharts/bitnami-mongodb
+  repository: 
   ## Bitnami MongoDB image tag
   ## ref: https://hub.docker.com/r/bitnami/mongodb/tags/
   ##
-  tag: 4.0.12-debian-9-r5
+  tag: 
   ## Specify a imagePullPolicy
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
   ##
