@@ -1,3 +1,4 @@
+apiVersion: v1
 name: mongodb
 version: 5.0.0
 appVersion: 4.0.3
