@@ -7,7 +7,7 @@ replicaCount: 1
 # imagePullSecrets:
 
 image:
-  repository: 10.134.200.110/nfs-provisioner
+  repository: 10.134.200.110:5000/nfs-provisioner
   tag: v2.3.0
   pullPolicy: IfNotPresent
 
