@@ -57,8 +57,6 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
-        - name: backupdata
-          mountPath: /mysqlbackupfile
       {{- if .Values.extraInitContainers }}
 {{ tpl .Values.extraInitContainers . | indent 6 }}
       {{- end }}
