@@ -58,7 +58,8 @@ spec:
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
         - name: data
-          mountPath: /mysqlbackupfile
+          mountPath: /backup
+          subPath: mysqlbackupfile
       {{- if .Values.extraInitContainers }}
 {{ tpl .Values.extraInitContainers . | indent 6 }}
       {{- end }}
@@ -154,7 +155,8 @@ spec:
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
         - name: data
-          mountPath: /mysqlbackupfile
+          mountPath: /backup
+          subPath: mysqlbackupfile
         {{- if .Values.configurationFiles }}
         {{- range $key, $val := .Values.configurationFiles }}
         - name: configurations
