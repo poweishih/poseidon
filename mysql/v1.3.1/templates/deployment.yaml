@@ -234,13 +234,6 @@ spec:
       {{- else }}
         emptyDir: {}
       {{- end -}}
-      - name: backupdata
-      {{- if .Values.persistence.enabled }}
-        persistentVolumeClaim:
-          claimName: backupvolume
-      {{- else }}
-        emptyDir: {}
-      {{- end -}}
       {{- if .Values.extraVolumes }}
 {{ tpl .Values.extraVolumes . | indent 6 }}
       {{- end }}
