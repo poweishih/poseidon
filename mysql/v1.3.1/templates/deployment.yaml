@@ -57,9 +57,8 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
-        - name: data
-          mountPath: /backup
-          subPath: mysqlbackupfile
+        - name: backupdata
+          mountPath: /mysqlbackupfile
       {{- if .Values.extraInitContainers }}
 {{ tpl .Values.extraInitContainers . | indent 6 }}
       {{- end }}
@@ -154,9 +153,8 @@ spec:
           {{- if .Values.persistence.subPath }}
           subPath: {{ .Values.persistence.subPath }}
           {{- end }}
-        - name: data
-          mountPath: /backup
-          subPath: mysqlbackupfile
+        - name: backupdata
+          mountPath: /mysqlbackupfile
         {{- if .Values.configurationFiles }}
         {{- range $key, $val := .Values.configurationFiles }}
         - name: configurations
@@ -237,6 +235,13 @@ spec:
       {{- if .Values.persistence.enabled }}
         persistentVolumeClaim:
           claimName: {{ .Values.persistence.existingClaim | default (include "mysql.fullname" .) }}
+      {{- else }}
+        emptyDir: {}
+      {{- end -}}
+      - name: backupdata
+      {{- if .Values.persistence.enabled }}
+        persistentVolumeClaim:
+          claimName: backupvolume
       {{- else }}
         emptyDir: {}
       {{- end -}}
