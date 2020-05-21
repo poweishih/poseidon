@@ -71,6 +71,7 @@ storageClass:
 
   mountOptions:
     - vers=3
+    - nolock
 
   ## ReclaimPolicy field of the class, which can be either Delete or Retain
   reclaimPolicy: Delete
