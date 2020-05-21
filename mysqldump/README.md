@@ -70,7 +70,7 @@ The following tables lists the configurable parameters of the mysqldump chart an
 | persistence.storageClass                      | storage class to use for PVC                                                   |                              |
 | persistence.subPath                           | subPath for PVC                                                                |                              |
 | allDatabases.enabled                          | backup all databases                                                           | true                         |
-| allDatabases.SingleSqlFile                    | backup all databases to single file                                            | false                        |
+| allDatabases.singleBackupFile                 | backup all databases to single file                                            | false                        |
 | housekeeping.enabled                          | delete olf backups in pvc                                                      | true                         |
 | housekeeping.keepDays                         | keep last x days of backups in PVC                                             | 10                           |
 | saveToDirectory                               | saves the sql backup to a directory named like the database or alldatabases    | false                        |
