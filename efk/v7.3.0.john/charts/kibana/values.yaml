@@ -129,4 +129,6 @@ affinity: {}
 
 nameOverride: ""
 fullnameOverride: ""
-enableProxy: true
+enableProxy: false
+
+serverBasePath: ""

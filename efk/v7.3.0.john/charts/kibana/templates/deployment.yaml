@@ -117,8 +117,10 @@ spec:
             value: "{{ .Values.language }}"
           - name: SERVER_HOST
             value: "{{ .Values.serverHost }}"
+          {{- if .Values.serverBasePath }}
           - name: SERVER_BASEPATH
-            value: "/kibana"
+            value: "{{ .Values.serverBasePath }}"
+          {{- end }}
 {{- if .Values.extraEnvs }}
 {{ toYaml .Values.extraEnvs | indent 10 }}
 {{- end }}

@@ -43,6 +43,12 @@ questions:
   type: boolean
   label: Expose Kibana using Nginx Proxy
   group: "Kibana Config"
+- variable: kibana.serverBasePath
+  default: ""
+  description: "Serve Kibana in another app with this base path"
+  type: string
+  label: Example - /kibana
+  group: "Kibana Config"
 # elasticSearch configs
 - variable: elasticsearch.replicas
   default: 3

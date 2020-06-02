@@ -11,6 +11,8 @@ kibana:
   enabled: true
   image: "ranchercharts/kibana-kibana"
   imageTag: "7.3.0"
+  server:
+    basePath: ""
 
 filebeat:
   enabled: false
