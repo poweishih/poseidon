@@ -118,12 +118,12 @@ podLabels: {}
 ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
 ##
 resources: {}
-# limits:
-#   cpu: 500m
-#   memory: 512Mi
-# requests:
-#   cpu: 100m
-#   memory: 256Mi
+limits:
+  cpu: 2000m
+  memory: 4096Mi
+requests:
+  cpu: 2000m
+  memory: 4096Mi
 
 ## Node selector
 ## ref: https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#nodeselector

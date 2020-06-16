@@ -115,13 +115,6 @@ spec:
           successThreshold: {{ .Values.readinessProbe.successThreshold }}
           failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
         {{- end }}
-        resources:
-          limits:
-            cpu: 2000m
-            memory: 4096Mi
-          requests:
-            cpu: 2000m
-            memory: 4096Mi
         volumeMounts:
         - name: data
           mountPath: /bitnami/mongodb
