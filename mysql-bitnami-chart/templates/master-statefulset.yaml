@@ -9,7 +9,7 @@ spec:
     matchLabels: {{- include "mysql.matchLabels" . | nindent 6 }}
       component: master
   serviceName: {{ template "mysql.master.fullname" . }}
-  replicas: 1
+  replicas: 2
   updateStrategy:
     type: {{ .Values.master.updateStrategy.type }}
     {{- if (eq "Recreate" .Values.master.updateStrategy.type) }}
