@@ -149,7 +149,12 @@ spec:
               subPath: mongodb.conf
             {{- end }}
           resources:
-{{ toYaml .Values.resources | indent 12 }}
+            limits:
+              cpu: 2000m
+              memory: 4096Mi
+            requests:
+              cpu: 2000m
+              memory: 4096Mi
 {{- if .Values.metrics.enabled }}
         - name: metrics
           image: {{ template "metrics.image" . }}
