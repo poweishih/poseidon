@@ -32,6 +32,30 @@ questions:
     description: "Busybox image tag"
     type: string
     label: Busybox Image Tag
+- variable: resources.requests.memory
+  default: "4096Mi"
+  label: Memory request
+  type: string
+  required: true
+  group: "Container Resource Settings"
+- variable: resources.limits.memory
+  default: "4096Mi"
+  label: Memory limit
+  type: string
+  required: true
+  group: "Container Resource Settings"
+- variable: resources.requests.cpu
+  default: "2000m"
+  label: CPU request
+  type: string
+  required: true
+  group: "Container Resource Settings"
+- variable: resources.limits.cpu
+  default: "2000m"
+  label: CPU limit
+  type: string
+  required: true
+  group: "Container Resource Settings"
 - variable: mysqlDatabase
   default: "admin"
   description: "Name of database to create"
