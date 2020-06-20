@@ -53,7 +53,7 @@ mysqlha:
     slave.cnf: |
       # Apply this config only on slaves.
       [mysqld]
-      super-read-only
+      # super-read-only
       skip_name_resolve
 
   podAnnotations: {}
