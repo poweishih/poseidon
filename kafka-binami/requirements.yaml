@@ -1,5 +1,5 @@
 dependencies:
-  - name: zookeeper
+  - name: bitnami/zookeeper
     version: 3.6.1-debian-10-r54
-    repository: 10.134.200.110:5000/bitnami/zookeeper
+    repository: 10.134.200.110:5000
     condition: zookeeper.enabled
