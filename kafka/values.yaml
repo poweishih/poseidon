@@ -4,10 +4,10 @@
 ##
 global:
   imageRegistryEnable: false
-  imageRegistry: myRegistryName
-  imagePullSecrets:
-    - myRegistryKeySecretName
-  storageClass: myStorageClass
+  # imageRegistry: myRegistryName
+  # imagePullSecrets:
+  #   - myRegistryKeySecretName
+  # storageClass: myStorageClass
 
 ## Bitnami Kafka image version
 ## ref: https://hub.docker.com/r/bitnami/kafka/tags/
