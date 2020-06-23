@@ -104,7 +104,7 @@ podManagementPolicy: Parallel
 
 ## Number of ZooKeeper nodes
 ##
-replicaCount: 3
+replicaCount: 1
 
 ## Basic time unit in milliseconds used by ZooKeeper for heartbeats
 ##
