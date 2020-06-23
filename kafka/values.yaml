@@ -260,11 +260,11 @@ auth:
   jaas:
     ## Kafka client user
     ##
-    clientUser: user
+    # clientUser: user
 
     ## Kafka client password
     ##
-    clientPassword: ""
+    # clientPassword: ""
 
     ## Kafka inter broker communication user
     ##
