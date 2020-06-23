@@ -1,5 +1,5 @@
 dependencies:
-  - name: bitnami/zookeeper
-    version: 3.6.1-debian-10-r54
-    repository: 10.134.200.110:5000
+  - name: zookeeper
+    version: 5.17.0
+    repository: http://10.134.200.113/xavier/custom-library.git
     condition: zookeeper.enabled
