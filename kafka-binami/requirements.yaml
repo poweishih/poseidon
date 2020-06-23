@@ -1,5 +1,5 @@
 dependencies:
   - name: zookeeper
     version: 5.17.0
-    repository: http://10.134.200.113/xavier/custom-library.git
+    repository: http://10.134.200.113/xavier/custom-library
     condition: zookeeper.enabled
