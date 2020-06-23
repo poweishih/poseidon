@@ -7,6 +7,7 @@ questions:
   default: false
   type: boolean
   label: Private Registry
+  show_subquestion_if: true
   group: "Global Settings"
   subquestions:
   - variable: global.imageRegistry
