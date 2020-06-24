@@ -145,6 +145,8 @@ spec:
               {{- end }}
             - name: KAFKA_INTER_BROKER_LISTENER_NAME
               value: {{ .Values.interBrokerListenerName | quote }}
+            - name: KAFKA_CFG_AUTHORIZER_CLASS_NAME
+              value: kafka.security.auth.SimpleAclAuthorizer
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               {{- if .Values.listenerSecurityProtocolMap }}
               value: {{ .Values.listenerSecurityProtocolMap | quote }}
