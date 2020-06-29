@@ -23,14 +23,14 @@ questions:
   required: true
   label: Kafka Brokers
   group: "Kafka Settings"
-- variable: logFlushIntervalMs
+- variable: logRetentionCheckIntervalMs
   default: 600
   description: "The maximum amount of time a message can sit in a log before we force a flush."
   type: int
   min: 0
   max: 10000000
   required: true
-  label: Message Flush Time (sec)
+  label: Message Flush Time (ms)
   group: "Kafka Settings"
 # Zookeeper Configurations
 - variable: zookeeper.replicaCount
