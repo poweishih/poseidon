@@ -181,8 +181,8 @@ spec:
             - name: KAFKA_CFG_BROKER_ID
               value: {{ .Values.brokerId | quote }}
             {{- if or (include "kafka.client.saslAuthentication" .) (include "kafka.interBroker.saslAuthentication" .) }}
-            - name: KAFKA_OPTS
-              value: "-Djava.security.auth.login.config=/opt/bitnami/kafka/config/kafka_jaas.conf"
+            # - name: KAFKA_OPTS
+            #   value: "-Djava.security.auth.login.config=/opt/bitnami/kafka/config/kafka_jaas.conf"
             {{- if (include "kafka.client.saslAuthentication" .) }}
             - name: KAFKA_CLIENT_USER
               value: {{ .Values.auth.jaas.clientUser | quote }}
