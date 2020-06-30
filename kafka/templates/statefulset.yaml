@@ -237,7 +237,7 @@ spec:
             - name: KAFKA_CFG_LOG_CLEANUP_POLICY
               value: delete
             - name: KAFKA_CFG_LOG_CLEANUP_INTERVAL_MINS
-              value: 5
+              value: "5"
             - name: KAFKA_CFG_LOG_CLEANER_ENABLE
               value: true
             # ==================================
