@@ -233,6 +233,14 @@ spec:
               value: {{ .Values.autoCreateTopicsEnable | quote }}
             - name: KAFKA_HEAP_OPTS
               value: {{ .Values.heapOpts | quote }}
+            # =========== LOG config ===========
+            - name: KAFKA_CFG_LOG_CLEANUP_POLICY
+              value: delete
+            - name: KAFKA_CFG_LOG_CLEANUP_INTERVAL_MINS
+              value: 5
+            - name: KAFKA_CFG_LOG_CLEANER_ENABLE
+              value: true
+            # ==================================
             - name: KAFKA_CFG_LOG_FLUSH_INTERVAL_MESSAGES
               value: {{ .Values.logFlushIntervalMessages | quote }}
             - name: KAFKA_CFG_LOG_FLUSH_INTERVAL_MS

@@ -18,26 +18,26 @@ questions:
   default: 3
   description: "Replicas of Kafka Brokers"
   type: int
-  min: 1
+  min: 3
   max: 8
   required: true
   label: Kafka Brokers
   group: "Kafka Settings"
-- variable: logRetentionCheckIntervalMs
-  default: 300000
-  description: "The maximum amount of time a message can sit in a log before we force a flush."
+- variable: logRetentionHours
+  default: 168
+  description: "The minimum age of a log file to be eligible for deletion due to age."
   type: int
   min: 0
   max: 10000000
   required: true
-  label: Message Flush Time (ms)
+  label: Log retention time(hr)
   group: "Kafka Settings"
 # Zookeeper Configurations
 - variable: zookeeper.replicaCount
   default: 3
   description: "Replicas of Zookeeper"
   type: int
-  min: 1
+  min: 3
   max: 8
   required: true
   label: Zookeeper replica
