@@ -25,7 +25,7 @@ spec:
     nodePort: {{ .Values.service.nodePort }}
 {{- end }}
 {{- if .Values.metrics.enabled }}
-  - name: metrics
+  - name: zmetrics
     port: 9216
     targetPort: metrics
 {{- end }}
