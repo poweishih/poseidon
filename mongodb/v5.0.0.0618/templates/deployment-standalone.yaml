@@ -130,7 +130,7 @@ spec:
         resources:
 {{ toYaml .Values.resources | indent 10 }}
 {{- if .Values.metrics.enabled }}
-      - name: metrics
+      - name: zmetrics
         image: {{ template "metrics.image" . }}
         imagePullPolicy: {{ .Values.metrics.image.pullPolicy | quote }}
         env:
