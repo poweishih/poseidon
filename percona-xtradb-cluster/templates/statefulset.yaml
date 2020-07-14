@@ -27,7 +27,7 @@ spec:
     spec:
       initContainers:
       - name: "remove-lost-found"
-        image: "10.134.200.110:5000/busybox:latest"
+        image: "10.20.210.65:5000/busybox:latest"
         imagePullPolicy: IfNotPresent
         command:
         - "rm"
@@ -121,7 +121,7 @@ spec:
         {{- end }}
       {{ if .Values.logTail }}
       - name: "logs"
-        image: "10.134.200.110:5000/busybox:latest"
+        image: "10.20.210.65:5000/busybox:latest"
         imagePullPolicy: IfNotPresent
         command:
         - "tail"
