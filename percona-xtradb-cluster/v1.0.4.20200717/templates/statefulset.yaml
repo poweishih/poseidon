@@ -27,7 +27,7 @@ spec:
     spec:
       initContainers:
       - name: "remove-lost-found"
-        image: "10.20.210.65:5000/busybox:latest"
+        image: "{{ .Values.global.registy_path }}/busybox:latest"
         imagePullPolicy: IfNotPresent
         command:
         - "rm"
@@ -38,7 +38,7 @@ spec:
           mountPath: /var/lib/mysql
       containers:
       - name: database
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: "{{ .Values.global.registy_path }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy | quote }}
         command:
         - "/bin/bash"
@@ -121,7 +121,7 @@ spec:
         {{- end }}
       {{ if .Values.logTail }}
       - name: "logs"
-        image: "10.20.210.65:5000/busybox:latest"
+        image: "{{ .Values.global.registy_path }}/busybox:latest"
         imagePullPolicy: IfNotPresent
         command:
         - "tail"
@@ -133,11 +133,7 @@ spec:
       {{ end }}
       {{ if .Values.metricsExporter.enabled }}
       - name: metrics
-        {{- if .Values.metricsExporter.tag }}
-        image: prom/mysqld-exporter:{{ .Values.metricsExporter.tag }}
-        {{- else }}
-        image: prom/mysqld-exporter
-        {{- end }}
+        image: {{ .Values.global.registy_path }}/prom/mysqld-exporter:{{ .Values.metricsExporter.tag }}
         imagePullPolicy: IfNotPresent
 {{- if .Values.metricsExporter.commandOverrides }}
         command:
