@@ -108,7 +108,7 @@ prometheus:
   ## Are you using [Prometheus Operator](https://coreos.com/operators/prometheus/docs/latest/user-guides/getting-started.html)?
   operator:
     ## Setting to true will create Prometheus-Operator specific resources like ServiceMonitors
-    enabled: true
+    enabled: false
 
     ## Configures alerts for Prometheus to pick up
     prometheusRule:
@@ -130,7 +130,7 @@ prometheus:
       interval: 10s
 
       ## Namespace which Prometheus is installed in
-      namespace: cattle-prometheus
+      # namespace: monitoring
 
       ## Label Selector for Prometheus to find ServiceMonitors
       # selector:
