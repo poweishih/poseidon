@@ -99,7 +99,7 @@ configFiles:
 ## When set to true will create sidecar for `prom/mysqld-exporter`
 ## metrics exporting
 metricsExporter:
-  enabled: false
+  enabled: true
   commandOverrides: []
   argsOverrides: []
   tag: v0.10.0
@@ -130,7 +130,7 @@ prometheus:
       interval: 10s
 
       ## Namespace which Prometheus is installed in
-      # namespace: monitoring
+      namespace: cattle-prometheus
 
       ## Label Selector for Prometheus to find ServiceMonitors
       # selector:
