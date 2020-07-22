@@ -158,7 +158,7 @@ auth:
   clientUser: user
   ## Password that will use Zookeeper clients to auth
   ##
-  clientPassword: ""
+  clientPassword: "12345678"
   ## Comma, semicolon or whitespace separated list of user to be created. Specify them as a string, for example: "user1,user2,admin"
   ##
   serverUsers: admin

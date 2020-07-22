@@ -264,7 +264,7 @@ auth:
 
     ## Kafka client password
     ##
-    clientPassword: ""
+    clientPassword: "12345678"
 
     ## Kafka inter broker communication user
     ##
