@@ -192,9 +192,9 @@ service:
   electionPort: 3888
   publishNotReadyAddresses: true
   tls:
-    client_enable: true
-    quorum_enable: true
-    disable_base_client_port: true
+    client_enable: false
+    quorum_enable: false
+    disable_base_client_port: false
 
     client_port: 3181
 
