@@ -260,11 +260,11 @@ auth:
   jaas:
     ## Kafka client user
     ##
-    clientUser: user
+    clientUser: admin
 
     ## Kafka client password
     ##
-    clientPassword: "12345678"
+    clientPassword: admin
 
     ## Kafka inter broker communication user
     ##
