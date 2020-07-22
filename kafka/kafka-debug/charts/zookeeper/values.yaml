@@ -122,6 +122,10 @@ syncLimit: 5
 ##
 maxClientCnxns: 60
 
+## Maximum session timeout in milliseconds that the server will allow the client to negotiate. Defaults to 20 times the tickTime.
+##
+maxSessionTimeout: 40000
+
 ## A list of comma separated Four Letter Words commands to use
 ##
 fourlwCommandsWhitelist: srvr, mntr
@@ -132,19 +136,7 @@ listenOnAllIPs: false
 
 ## Allow to accept connections from unauthenticated users
 ##
-allowAnonymousLogin: false
-
-autopurge:
-  ## Retains the snapRetainCount most recent snapshots and the corresponding transaction logs and deletes the rest
-  ##
-  snapRetainCount: 3
-  ## The time interval in hours for which the purge task has to be triggered. Set to a positive integer (1 and above) to enable the auto purging.
-  ##
-  purgeInterval: 0
-
-## Maximum session timeout in milliseconds that the server will allow the client to negotiate. Defaults to 20 times the tickTime.
-##
-maxSessionTimeout: 40000
+allowAnonymousLogin: true
 
 auth:
   ## Use existing secret (ignores previous password)
@@ -155,16 +147,16 @@ auth:
   enabled: false
   ## User that will use Zookeeper clients to auth
   ##
-  clientUser: user
+  clientUser:
   ## Password that will use Zookeeper clients to auth
   ##
-  clientPassword: "12345678"
+  clientPassword:
   ## Comma, semicolon or whitespace separated list of user to be created. Specify them as a string, for example: "user1,user2,admin"
   ##
-  serverUsers: admin
+  serverUsers:
   ## Comma, semicolon or whitespace separated list of passwords to assign to users when created. Specify them as a string, for example: "pass4user1, pass4user2, pass4admin"
   ##
-  serverPasswords: admin
+  serverPasswords:
 
 ## Size in MB for the Java Heap options (Xmx and XMs). This env var is ignored if Xmx an Xms are configured via JVMFLAGS
 ##
@@ -192,9 +184,9 @@ service:
   electionPort: 3888
   publishNotReadyAddresses: true
   tls:
-    client_enable: false
-    quorum_enable: false
-    disable_base_client_port: false
+    client_enable: true
+    quorum_enable: true
+    disable_base_client_port: true
 
     client_port: 3181
 
