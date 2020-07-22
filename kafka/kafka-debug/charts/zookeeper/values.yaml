@@ -122,10 +122,6 @@ syncLimit: 5
 ##
 maxClientCnxns: 60
 
-## Maximum session timeout in milliseconds that the server will allow the client to negotiate. Defaults to 20 times the tickTime.
-##
-maxSessionTimeout: 40000
-
 ## A list of comma separated Four Letter Words commands to use
 ##
 fourlwCommandsWhitelist: srvr, mntr
@@ -137,6 +133,18 @@ listenOnAllIPs: false
 ## Allow to accept connections from unauthenticated users
 ##
 allowAnonymousLogin: true
+
+autopurge:
+  ## Retains the snapRetainCount most recent snapshots and the corresponding transaction logs and deletes the rest
+  ##
+  snapRetainCount: 3
+  ## The time interval in hours for which the purge task has to be triggered. Set to a positive integer (1 and above) to enable the auto purging.
+  ##
+  purgeInterval: 0
+
+## Maximum session timeout in milliseconds that the server will allow the client to negotiate. Defaults to 20 times the tickTime.
+##
+maxSessionTimeout: 40000
 
 auth:
   ## Use existing secret (ignores previous password)
