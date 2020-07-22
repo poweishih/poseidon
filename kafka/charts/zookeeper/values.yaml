@@ -152,7 +152,7 @@ auth:
   # existingSecret:
   ## Enable Zookeeper auth. It uses SASL/Digest-MD5
   ##
-  enabled: true
+  enabled: false
   ## User that will use Zookeeper clients to auth
   ##
   clientUser: user

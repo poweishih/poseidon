@@ -878,7 +878,7 @@ zookeeper:
   auth:
     ## Enable Zookeeper auth
     ##
-    enabled: false
+    enabled: true
     ## User that will use Zookeeper clients to auth
     ##
     # clientUser:
