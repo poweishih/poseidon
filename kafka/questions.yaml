@@ -70,7 +70,7 @@ questions:
   required: false
   label: Memory Limit
   group: "Resource Settings"
-- variable: resources.limits.cpu
+- variable: resources.requests.memory
   default: 256
   description: "Memory request value (Mi)"
   type: int
