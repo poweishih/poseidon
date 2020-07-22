@@ -32,6 +32,35 @@ questions:
   required: true
   label: Log retention time(hr)
   group: "Kafka Settings"
+# Resource Configurations
+- variable: resources.limits.cpu
+  default: 300m
+  description: "CPU limit value (m)"
+  type: string
+  required: false
+  label: CPU Limit
+  group: "Kafka Settings"
+- variable: resources.requests.cpu
+  default: 300m
+  description: "CPU request value (m)"
+  type: string
+  required: false
+  label: CPU Request
+  group: "Kafka Settings"
+- variable: resources.limits.memory
+  default: 256Mi
+  description: "Memory limit value (Mi)"
+  type: string
+  required: false
+  label: Memory Limit
+  group: "Kafka Settings"
+- variable: resources.requests.memory
+  default: 256Mi
+  description: "Memory request value (Mi)"
+  type: string
+  required: false
+  label: Memory Request
+  group: "Kafka Settings"
 # Zookeeper Configurations
 - variable: zookeeper.replicaCount
   default: 3
@@ -43,31 +72,31 @@ questions:
   label: Zookeeper replica
   group: "Zookeeper Settings"
 # Resource Configurations
-- variable: resources.limits.cpu
+- variable: zookeeper.resources.limits.cpu
   default: 300m
   description: "CPU limit value (m)"
   type: string
   required: false
   label: CPU Limit
-  group: "Resource Settings"
-- variable: resources.requests.cpu
+  group: "Zookeeper Settings"
+- variable: zookeeper.resources.requests.cpu
   default: 300m
   description: "CPU request value (m)"
   type: string
   required: false
   label: CPU Request
-  group: "Resource Settings"
-- variable: resources.limits.memory
+  group: "Zookeeper Settings"
+- variable: zookeeper.resources.limits.memory
   default: 256Mi
   description: "Memory limit value (Mi)"
   type: string
   required: false
   label: Memory Limit
-  group: "Resource Settings"
-- variable: resources.requests.memory
+  group: "Zookeeper Settings"
+- variable: zookeeper.resources.requests.memory
   default: 256Mi
   description: "Memory request value (Mi)"
   type: string
   required: false
   label: Memory Request
-  group: "Resource Settings"
+  group: "Zookeeper Settings"
