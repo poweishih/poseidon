@@ -42,3 +42,40 @@ questions:
   required: true
   label: Zookeeper replica
   group: "Zookeeper Settings"
+# Resource Configurations
+- variable: resources.limits.cpu
+  default: 300
+  description: "CPU limit value (m)"
+  type: int
+  min: 300
+  max: 9999
+  required: false
+  label: CPU Limit
+  group: "Resource Settings"
+- variable: resources.requests.cpu
+  default: 300
+  description: "CPU request value (m)"
+  type: int
+  min: 300
+  max: 9999
+  required: false
+  label: CPU Request
+  group: "Resource Settings"
+- variable: resources.limits.memory
+  default: 256
+  description: "Memory limit value (Mi)"
+  type: int
+  min: 256
+  max: 9999
+  required: false
+  label: Memory Limit
+  group: "Resource Settings"
+- variable: resources.limits.cpu
+  default: 256
+  description: "Memory request value (Mi)"
+  type: int
+  min: 256
+  max: 9999
+  required: false
+  label: Memory Request
+  group: "Resource Settings"
