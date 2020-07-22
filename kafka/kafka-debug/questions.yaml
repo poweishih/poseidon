@@ -32,35 +32,6 @@ questions:
   required: true
   label: Log retention time(hr)
   group: "Kafka Settings"
-# Resource Configurations
-- variable: resources.limits.cpu
-  default: 300m
-  description: "CPU limit value (m)"
-  type: string
-  required: false
-  label: CPU Limit
-  group: "Kafka Settings"
-- variable: resources.requests.cpu
-  default: 300m
-  description: "CPU request value (m)"
-  type: string
-  required: false
-  label: CPU Request
-  group: "Kafka Settings"
-- variable: resources.limits.memory
-  default: 256Mi
-  description: "Memory limit value (Mi)"
-  type: string
-  required: false
-  label: Memory Limit
-  group: "Kafka Settings"
-- variable: resources.requests.memory
-  default: 256Mi
-  description: "Memory request value (Mi)"
-  type: string
-  required: false
-  label: Memory Request
-  group: "Kafka Settings"
 # Zookeeper Configurations
 - variable: zookeeper.replicaCount
   default: 3
@@ -70,33 +41,4 @@ questions:
   max: 8
   required: true
   label: Zookeeper replica
-  group: "Zookeeper Settings"
-# Resource Configurations
-- variable: zookeeper.resources.limits.cpu
-  default: 250m
-  description: "CPU limit value (m)"
-  type: string
-  required: false
-  label: CPU Limit
-  group: "Zookeeper Settings"
-- variable: zookeeper.resources.requests.cpu
-  default: 250m
-  description: "CPU request value (m)"
-  type: string
-  required: false
-  label: CPU Request
-  group: "Zookeeper Settings"
-- variable: zookeeper.resources.limits.memory
-  default: 256Mi
-  description: "Memory limit value (Mi)"
-  type: string
-  required: false
-  label: Memory Limit
-  group: "Zookeeper Settings"
-- variable: zookeeper.resources.requests.memory
-  default: 256Mi
-  description: "Memory request value (Mi)"
-  type: string
-  required: false
-  label: Memory Request
   group: "Zookeeper Settings"
