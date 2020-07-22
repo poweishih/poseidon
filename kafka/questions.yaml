@@ -73,14 +73,14 @@ questions:
   group: "Zookeeper Settings"
 # Resource Configurations
 - variable: zookeeper.resources.limits.cpu
-  default: 300m
+  default: 250m
   description: "CPU limit value (m)"
   type: string
   required: false
   label: CPU Limit
   group: "Zookeeper Settings"
 - variable: zookeeper.resources.requests.cpu
-  default: 300m
+  default: 250m
   description: "CPU request value (m)"
   type: string
   required: false
