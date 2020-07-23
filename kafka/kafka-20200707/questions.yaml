@@ -18,7 +18,7 @@ questions:
   default: 3
   description: "Replicas of Kafka Brokers"
   type: int
-  min: 3
+  min: 1
   max: 8
   required: true
   label: Kafka Brokers
@@ -37,7 +37,7 @@ questions:
   default: 3
   description: "Replicas of Zookeeper"
   type: int
-  min: 3
+  min: 1
   max: 8
   required: true
   label: Zookeeper replica
