@@ -1,0 +1,44 @@
+labels:
+  io.cattle.role: project # options are cluster/project
+  io.rancher.app_min_version: 11.2.2
+questions:
+# Private Registry
+- variable: global.imageRegistryEnable
+  default: false
+  type: boolean
+  label: Private Registry
+  show_subquestion_if: true
+  group: "Global Settings"
+  subquestions:
+  - variable: global.imageRegistry
+    type: string
+    label: Private Registry path
+# Kafka Configurations
+- variable: replicaCount
+  default: 3
+  description: "Replicas of Kafka Brokers"
+  type: int
+  min: 1
+  max: 8
+  required: true
+  label: Kafka Brokers
+  group: "Kafka Settings"
+- variable: logRetentionHours
+  default: 168
+  description: "The minimum age of a log file to be eligible for deletion due to age."
+  type: int
+  min: 0
+  max: 10000000
+  required: true
+  label: Log retention time(hr)
+  group: "Kafka Settings"
+# Zookeeper Configurations
+- variable: zookeeper.replicaCount
+  default: 3
+  description: "Replicas of Zookeeper"
+  type: int
+  min: 1
+  max: 8
+  required: true
+  label: Zookeeper replica
+  group: "Zookeeper Settings"
