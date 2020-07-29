@@ -24,7 +24,7 @@ questions:
   label: RabbitMQ Replicas
   group: "RabbitMQ Settings"
 # MQTT Configurations
-- variable: rabbitmqMQTTPlugin
+- variable: rabbitmqMQTTPlugin.enabled
   default: false
   description: "Enable MQTT protocol"
   type: boolean
