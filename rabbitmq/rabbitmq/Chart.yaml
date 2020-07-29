@@ -1,4 +1,4 @@
-name: rabbitmq-ha
+name: rabbitmq
 apiVersion: v1
 appVersion: 3.8.5
 version: 1.46.4
