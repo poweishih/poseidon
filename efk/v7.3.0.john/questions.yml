@@ -51,13 +51,13 @@ questions:
   group: "Kibana Config"
 # elasticSearch configs
 - variable: elasticsearch.replicas
-  default: 3
+  default: 1
   description: "config elasticSearch replicas"
   type: int
   label: Config ElasticSearch Replicas
   required: true
   group: "Elasticsearch Config"
-  min: 3
+  min: 1
   max: 99
 - variable: elasticsearch.antiAffinity
   default: "soft"
