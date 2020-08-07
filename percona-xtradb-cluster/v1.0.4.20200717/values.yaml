@@ -6,7 +6,7 @@ global:
 ## ref: https://hub.docker.com/r/percona/percona-xtradb-cluster/tags/
 image:
   repository: "percona/percona-xtradb-cluster"
-  tag: "8.0.19-10.1"
+  tag: "5.7.19"
   pullPolicy: IfNotPresent
 
 # Desired number of members of xtradb cluster
