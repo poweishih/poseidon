@@ -30,32 +30,39 @@ questions:
   type: boolean
   label: Enable MQTT
   group: "Other Settings"
+- variable: rabbitmqMemoryHighWatermark
+  default: 256Mi
+  description: "Memory High Watermark value (Mi) PS. This value is 0.4 * Memory Limit."
+  type: string
+  required: false
+  label: Memory High Watermark
+  group: "Other Settings"
 # Resource Configurations
-# - variable: resources.limits.cpu
-#   default: 1000m
-#   description: "CPU limit value (m)"
-#   type: string
-#   required: false
-#   label: CPU Limit
-#   group: "Kafka Settings"
-# - variable: resources.requests.cpu
-#   default: 1000m
-#   description: "CPU request value (m)"
-#   type: string
-#   required: false
-#   label: CPU Request
-#   group: "Kafka Settings"
-# - variable: resources.limits.memory
-#   default: 1024Mi
-#   description: "Memory limit value (Mi)"
-#   type: string
-#   required: false
-#   label: Memory Limit
-#   group: "Kafka Settings"
-# - variable: resources.requests.memory
-#   default: 1024Mi
-#   description: "Memory request value (Mi)"
-#   type: string
-#   required: false
-#   label: Memory Request
-#   group: "Kafka Settings"
+- variable: resources.limits.cpu
+  default: 100m
+  description: "CPU limit value (m)"
+  type: string
+  required: false
+  label: CPU Limit
+  group: "Resource Settings"
+- variable: resources.requests.cpu
+  default: 100m
+  description: "CPU request value (m)"
+  type: string
+  required: false
+  label: CPU Request
+  group: "Resource Settings"
+- variable: resources.limits.memory
+  default: 1024Mi
+  description: "Memory limit value (Mi)"
+  type: string
+  required: false
+  label: Memory Limit
+  group: "Resource Settings"
+- variable: resources.requests.memory
+  default: 1024Mi
+  description: "Memory request value (Mi)"
+  type: string
+  required: false
+  label: Memory Request
+  group: "Resource Settings"
