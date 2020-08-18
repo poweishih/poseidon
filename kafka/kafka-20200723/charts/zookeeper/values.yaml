@@ -289,7 +289,7 @@ resources:
     memory: 256Mi
     cpu: 250m
   limits:
-    memory: 256Mi
+    memory: 1024Mi
     cpu: 250m
 
 ## Configure extra options for liveness and readiness probes
