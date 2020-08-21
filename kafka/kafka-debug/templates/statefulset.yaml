@@ -151,6 +151,10 @@ spec:
             - name: KAFKA_CFG_SUPER_USERS
               value: User:admin
             # ==============================
+            # ======= Add JVM config =======
+            - name: KAFKA_JVM_PERFORMANCE_OPTS
+              value: -server -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0 -XX:+UseG1GC -XX:MaxGCPauseMillis=20 -XX:InitiatingHeapOccupancyPercent=35 -XX:+ExplicitGCInvokesConcurrent -XX:MaxInlineLevel=15 -Djava.awt.headless=true
+            # ==============================
             - name: KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP
               {{- if .Values.listenerSecurityProtocolMap }}
               value: {{ .Values.listenerSecurityProtocolMap | quote }}
