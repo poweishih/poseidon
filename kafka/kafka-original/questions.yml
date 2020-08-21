@@ -8,6 +8,20 @@ questions:
   type: boolean
   label: Enable Confluent Enterprise Platform
   group: "Global Settings"
+- variable: global.imageRegistry.enabled
+  default: false
+  description: "Enable private registry setting"
+  type: boolean
+  required: true
+  show_subquestion_if: true
+  label: Enable Private Registry
+  group: "Global Settings"
+  subquestions:
+  - variable: global.imageRegistry.path
+    default: ""
+    description: "Setting private registry path"
+    type: string
+    label: Private Registry Path
 - variable: cp-kafka.replicas
   default: 3
   description: "Replicas of Kafka Brokers"

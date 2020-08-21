@@ -10,7 +10,7 @@ keywords:
 home: https://kafka.apache.org/
 sources:
 - https://github.com/confluentinc/cp-helm-charts
-icon: file://../logo.png
+icon: https://bitnami.com/assets/stacks/kafka/img/kafka-stack-110x117.png
 maintainers:
 - name: qshao-pivotal
   email: qshao@pivotal.io
