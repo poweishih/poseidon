@@ -329,7 +329,7 @@ networkPolicy:
 ## Prometheus Metrics
 ##
 metrics:
-  enabled: true
+  enabled: false
   port: 9141
   ## Prometheus pod annotations
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
@@ -341,7 +341,7 @@ metrics:
   ## Prometheus Operator ServiceMonitor configuration
   ##
   serviceMonitor:
-    enabled: true
+    enabled: false
     ## Namespace for the ServiceMonitor Resource (defaults to the Release Namespace)
     ##
     # namespace:
