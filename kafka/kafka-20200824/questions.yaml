@@ -19,6 +19,13 @@ questions:
   type: boolean
   label: Enbale Prometheus
   group: "Prometheus Settings"
+  show_subquestion_if: true
+  subquestions:
+  - variable: metrics.jmx.enabled
+    default: false
+    type: boolean
+    label: Enbale JMX Metrics
+    group: "Prometheus Settings"
 # Kafka Configurations
 - variable: replicaCount
   default: 3
