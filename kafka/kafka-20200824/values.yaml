@@ -693,8 +693,8 @@ metrics:
       # resources, such as Minikube. If you do want to specify resources, uncomment the following
       # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
       limits:
-        cpu: 250m
-        memory: 256Mi
+        cpu: 1000m
+        memory: 1024Mi
       requests:
         cpu: 250m
         memory: 256Mi
@@ -844,15 +844,15 @@ metrics:
   ## Prometheus Operator ServiceMonitor configuration
   ##
   serviceMonitor:
-    enabled: false
+    enabled: true
     ## Namespace in which Prometheus is running
     ##
-    # namespace: monitoring
+    namespace: cattle-prometheus
 
     ## Interval at which metrics should be scraped.
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
     ##
-    # interval: 10s
+    interval: 10s
 
     ## Timeout after which the scrape is ended
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
@@ -862,8 +862,8 @@ metrics:
     ## ServiceMonitor selector labels
     ## ref: https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-configuration
     ##
-    # selector:
-    #   prometheus: my-prometheus
+    selector:
+      # prometheus: my-prometheus
 
 ##
 ## Zookeeper chart configuration
