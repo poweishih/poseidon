@@ -329,7 +329,7 @@ networkPolicy:
 ## Prometheus Metrics
 ##
 metrics:
-  enabled: false
+  enabled: true
   port: 9141
   ## Prometheus pod annotations
   ## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
@@ -341,15 +341,15 @@ metrics:
   ## Prometheus Operator ServiceMonitor configuration
   ##
   serviceMonitor:
-    enabled: false
+    enabled: true
     ## Namespace for the ServiceMonitor Resource (defaults to the Release Namespace)
     ##
-    namespace:
+    # namespace:
 
     ## Interval at which metrics should be scraped.
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
     ##
-    # interval: 10s
+    interval: 10s
 
     ## Timeout after which the scrape is ended
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint

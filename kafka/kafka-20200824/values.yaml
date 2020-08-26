@@ -847,7 +847,7 @@ metrics:
     enabled: true
     ## Namespace in which Prometheus is running
     ##
-    namespace: cattle-prometheus
+    # namespace: cattle-prometheus
 
     ## Interval at which metrics should be scraped.
     ## ref: https://github.com/coreos/prometheus-operator/blob/master/Documentation/api.md#endpoint
@@ -862,7 +862,7 @@ metrics:
     ## ServiceMonitor selector labels
     ## ref: https://github.com/bitnami/charts/tree/master/bitnami/prometheus-operator#prometheus-configuration
     ##
-    selector:
+    # selector:
       # prometheus: my-prometheus
 
 ##
