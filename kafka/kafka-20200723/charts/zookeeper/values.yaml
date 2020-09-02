@@ -286,11 +286,11 @@ affinity: {}
 ##
 resources:
   requests:
-    memory: 256Mi
-    cpu: 250m
+    memory: 1024Mi
+    cpu: 1000m
   limits:
     memory: 1024Mi
-    cpu: 250m
+    cpu: 1000m
 
 ## Configure extra options for liveness and readiness probes
 ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#configure-probes)
