@@ -539,7 +539,7 @@ env: {}
 prometheus:
   ## Configures Prometheus Exporter to expose and scrape stats.
   exporter:
-    enabled: true
+    enabled: false
     env: {}
     image:
       repository: kbudde/rabbitmq-exporter
