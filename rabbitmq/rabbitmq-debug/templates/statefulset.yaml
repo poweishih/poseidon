@@ -236,7 +236,11 @@ spec:
             {{- end }}
         {{ if .Values.prometheus.exporter.enabled }}
         - name: {{ .Chart.Name }}-exporter
+          {{- if .Values.global.imageRegistryEnable }}
+          image: {{ .Values.global.imageRegistry }}/{{ .Values.prometheus.exporter.image.repository }}:{{ .Values.prometheus.exporter.image.tag }}
+          {{- else }}
           image: {{ .Values.prometheus.exporter.image.repository }}:{{ .Values.prometheus.exporter.image.tag }}
+          {{- end }}
           imagePullPolicy: {{ .Values.prometheus.exporter.image.pullPolicy }}
           ports:
           - name: exporter

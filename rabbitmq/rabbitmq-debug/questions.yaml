@@ -39,14 +39,14 @@ questions:
   group: "Other Settings"
 # Resource Configurations
 - variable: resources.limits.cpu
-  default: 100m
+  default: 1000m
   description: "CPU limit value (m)"
   type: string
   required: false
   label: CPU Limit
   group: "Resource Settings"
 - variable: resources.requests.cpu
-  default: 100m
+  default: 1000m
   description: "CPU request value (m)"
   type: string
   required: false

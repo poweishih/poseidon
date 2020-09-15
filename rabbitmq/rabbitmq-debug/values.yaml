@@ -539,11 +539,11 @@ env: {}
 prometheus:
   ## Configures Prometheus Exporter to expose and scrape stats.
   exporter:
-    enabled: false
+    enabled: true
     env: {}
     image:
       repository: kbudde/rabbitmq-exporter
-      tag: v0.29.0
+      tag: v1.0.0-RC7.1
       pullPolicy: IfNotPresent
 
     ## Port Prometheus scrapes for metrics
@@ -563,12 +563,12 @@ prometheus:
   ## Prometheus is using Operator.  Setting to true will create Operator specific resources like ServiceMonitors and Alerts
   operator:
     ## Are you using Prometheus Operator? [Blog Post](https://coreos.com/blog/the-prometheus-operator.html)
-    enabled: false
+    enabled: true
 
     ## Configures Alerts, which will be setup via Prometheus Operator / ConfigMaps.
     alerts:
       ## Prometheus exporter must be enabled as well
-      enabled: true
+      enabled: false
 
       ## Selector must be configured to match Prometheus Install, defaulting to whats done by Prometheus Operator
       ## See [CoreOS Prometheus Chart](https://github.com/coreos/prometheus-operator/tree/master/helm)
@@ -581,13 +581,13 @@ prometheus:
       interval: 10s
 
       # Namespace Prometheus is installed in
-      namespace: monitoring
+      # namespace: monitoring
 
       ## Defaults to whats used if you follow CoreOS [Prometheus Install Instructions](https://github.com/coreos/prometheus-operator/tree/master/helm#tldr)
       ## [Prometheus Selector Label](https://github.com/coreos/prometheus-operator/blob/master/helm/prometheus/templates/prometheus.yaml#L65)
       ## [Kube Prometheus Selector Label](https://github.com/coreos/prometheus-operator/blob/master/helm/kube-prometheus/values.yaml#L298)
-      selector:
-        prometheus: kube-prometheus
+      # selector:
+      #   prometheus: kube-prometheus
 
 ## Kubernetes Cluster Domain
 clusterDomain: cluster.local
