@@ -293,7 +293,7 @@ spec:
           mountPath: /opt/bitnami/redis-sentinel/etc
       {{- end }}
 {{- if .Values.metrics.enabled }}
-      - name: metrics
+      - name: zmetrics
         image: {{ template "redis.metrics.image" . }}
         imagePullPolicy: {{ .Values.metrics.image.pullPolicy | quote }}
         args:
