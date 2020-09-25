@@ -59,7 +59,7 @@ The following table lists the configurable parameters of the Percona chart and t
 | `allowRootFrom`            | Remote hosts to allow root access, set to `127.0.0.1` to disable remote root  | `%` |
 | `mysqlRootPassword`        | Password for the `root` user.      | `not-a-secure-password`                                                      |
 | `xtraBackupPassword`       | Password for the `xtrabackup` user. | `replicate-my-data` |
-| `pxc_strict_mode`          | Setting for `pxc_strict_mode`.     | ENFORCING                                                  |
+| `pxc_strict_mode`          | Setting for `pxc_strict_mode`.     | PERMISSIVE                                                 |
 | `mysqlUser`                | Username of new user to create.    | `nil`                                                      |
 | `mysqlPassword`            | Password for the new user.         | `nil`                                                      |
 | `mysqlDatabase`            | Name for new database to create.   | `nil`                                                      |
