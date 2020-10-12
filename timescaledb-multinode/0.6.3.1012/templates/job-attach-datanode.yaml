@@ -1,6 +1,7 @@
 # This file and its contents are licensed under the Apache License 2.0.
 # Please see the included NOTICE for copyright information and LICENSE for a copy of the license.
 
+{{ $registry_path := .Values.global.registry_path }}
 {{- range $pod, $e := until ( .Values.dataNodes | int) }}
 {{- range $index, $dbname := $.Values.postgresql.databases }}
 ---
@@ -28,7 +29,7 @@ spec:
     spec:
       containers:
       - name: attachdn-{{ $index }}
-        image: postgres:11-alpine # A relatively small official image that can run psql
+        image: "{{ $registry_path }}/postgres:11-alpine" # A relatively small official image that can run psql
         command:
           - sh
           - -c

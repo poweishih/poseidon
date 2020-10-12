@@ -33,7 +33,7 @@ spec:
         fsGroup: 1000
       initContainers:
       - name: initdb
-        image: "{{ .Values.global.registy_path }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: "{{ .Values.global.registry_path }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: POSTGRESQL_CUSTOM_PARAMETERS
@@ -74,7 +74,7 @@ spec:
           subPath: "{{ .Values.persistentVolume.subPath }}"
       containers:
       - name: timescaledb
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: "{{ .Values.global.registry_path }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         # We start postgres with a fully cleared environment
         command:
