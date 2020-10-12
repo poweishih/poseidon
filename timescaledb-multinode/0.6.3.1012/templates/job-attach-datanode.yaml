@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
       - name: attachdn-{{ $index }}
-        image: "{{ .Values.global.registy_path }}/postgres:11-alpine" # A relatively small official image that can run psql
+        image: postgres:11-alpine # A relatively small official image that can run psql
         command:
           - sh
           - -c
