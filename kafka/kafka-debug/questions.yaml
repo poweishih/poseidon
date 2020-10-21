@@ -13,6 +13,18 @@ questions:
   - variable: global.imageRegistry
     type: string
     label: Private Registry path
+# Service
+- variable: service.type
+  label: Service Type
+  default: ClusterIP
+  type: enum
+  options: [ClusterIP, LoadBalancer]
+  show_if: "service.type=LoadBalancer"
+  group: "Global Settings"
+  subquestions:
+  - variable: service.loadBalancerIP
+    type: string
+    label: Load Balancer IP
 # Kafka Configurations
 - variable: replicaCount
   default: 3
