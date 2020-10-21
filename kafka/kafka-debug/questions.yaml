@@ -16,9 +16,9 @@ questions:
 # Service
 - variable: service.type
   label: Service Type
-  default: ClusterIP
+  default: "ClusterIP"
   type: enum
-  options: [ClusterIP, LoadBalancer]
+  options: ["ClusterIP", "LoadBalancer"]
   show_if: "service.type=LoadBalancer"
   group: "Global Settings"
   subquestions:
