@@ -22,9 +22,11 @@ questions:
   group: "Global Settings"
 # Load Balance IP
 - variable: service.loadBalancerIP
+  required: true
   type: string
   label: Load Balancer IP
-  show_if: service.type=LoadBalancer
+  group: "Global Settings"
+  show_if: "service.type=LoadBalancer"
 # Kafka Configurations
 - variable: replicaCount
   default: 3
