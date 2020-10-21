@@ -19,12 +19,12 @@ questions:
   default: "ClusterIP"
   type: enum
   options: ["ClusterIP", "LoadBalancer"]
-  show_if: "service.type=LoadBalancer"
+  # show_if: service.type=LoadBalancer
   group: "Global Settings"
-  subquestions:
-  - variable: service.loadBalancerIP
-    type: string
-    label: Load Balancer IP
+  # subquestions:
+  # - variable: service.loadBalancerIP
+  #   type: string
+  #   label: Load Balancer IP
 # Kafka Configurations
 - variable: replicaCount
   default: 3
