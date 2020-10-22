@@ -1,5 +1,5 @@
 dependencies:
 - name: common
-  repository: http://10.57.241.229/hochiang/bitnami_charts
+  repository: http://10.57.241.229/hochiang/bitnami_charts/tree/master/bitnami
   version: 0.7.1
 
