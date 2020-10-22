@@ -2,5 +2,3 @@ dependencies:
   - name: common
     version: 0.x.x
     repository: http://10.57.241.229/hochiang/bitnami_charts
-    tags:
-      - bitnami-common
