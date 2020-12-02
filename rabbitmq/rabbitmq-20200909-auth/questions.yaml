@@ -1,0 +1,68 @@
+labels:
+  io.cattle.role: project # options are cluster/project
+  io.rancher.app_min_version: 1.46.4
+questions:
+# Private Registry
+- variable: global.imageRegistryEnable
+  default: false
+  type: boolean
+  label: Private Registry
+  show_subquestion_if: true
+  group: "Global Settings"
+  subquestions:
+  - variable: global.imageRegistry
+    type: string
+    label: Private Registry path
+# RabbitMQ Configurations
+- variable: replicaCount
+  default: 3
+  description: "Replicas of RabbitMQ"
+  type: int
+  min: 1
+  max: 8
+  required: true
+  label: RabbitMQ Replicas
+  group: "RabbitMQ Settings"
+# MQTT Configurations
+- variable: rabbitmqMQTTPlugin.enabled
+  default: false
+  description: "Enable MQTT protocol"
+  type: boolean
+  label: Enable MQTT
+  group: "Other Settings"
+- variable: rabbitmqMemoryHighWatermark
+  default: 256Mi
+  description: "Memory High Watermark value (Mi) PS. This value is 0.4 * Memory Limit."
+  type: string
+  required: false
+  label: Memory High Watermark
+  group: "Other Settings"
+# Resource Configurations
+- variable: resources.limits.cpu
+  default: 1000m
+  description: "CPU limit value (m)"
+  type: string
+  required: false
+  label: CPU Limit
+  group: "Resource Settings"
+- variable: resources.requests.cpu
+  default: 1000m
+  description: "CPU request value (m)"
+  type: string
+  required: false
+  label: CPU Request
+  group: "Resource Settings"
+- variable: resources.limits.memory
+  default: 1024Mi
+  description: "Memory limit value (Mi)"
+  type: string
+  required: false
+  label: Memory Limit
+  group: "Resource Settings"
+- variable: resources.requests.memory
+  default: 1024Mi
+  description: "Memory request value (Mi)"
+  type: string
+  required: false
+  label: Memory Request
+  group: "Resource Settings"
