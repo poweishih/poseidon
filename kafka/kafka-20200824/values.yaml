@@ -111,7 +111,7 @@ deleteTopicEnable: true
 ## Switch to enable auto creation of topics.
 ## Enabling auto creation of topics not recommended for production or similar environments.
 ##
-autoCreateTopicsEnable: false
+autoCreateTopicsEnable: true
 
 ## The number of messages to accept before forcing a flush of data to disk.
 ##
@@ -229,8 +229,8 @@ auth:
   ## | sasl      | Yes (via SASL)                | No                 |
   ## | sasl_tls  | Yes (via SASL)                | Yes                |
   ##
-  clientProtocol: sasl
-  interBrokerProtocol: sasl
+  clientProtocol: plaintext
+  interBrokerProtocol: plaintext
 
   ## Name of the existing secret containing the truststore and
   ## one keystore per Kafka broker you have in the Kafka cluster.
@@ -875,7 +875,7 @@ zookeeper:
   auth:
     ## Enable Zookeeper auth
     ##
-    enabled: true
+    enabled: false
     ## User that will use Zookeeper clients to auth
     ##
     clientUser: zookeeperUser

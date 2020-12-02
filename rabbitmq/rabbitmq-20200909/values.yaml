@@ -4,8 +4,8 @@ global:
 ## RabbitMQ application credentials
 ## Ref: http://rabbitmq.com/access-control.html
 ##
-rabbitmqUsername: guest
-# rabbitmqPassword:
+rabbitmqUsername: admin
+rabbitmqPassword: admin
 
 ## RabbitMQ Management user used for health checks
 managementUsername: management
