@@ -5,7 +5,7 @@ global:
 ## Ref: http://rabbitmq.com/access-control.html
 ##
 rabbitmqUsername: admin
-# rabbitmqPassword:
+rabbitmqPassword: admin
 
 ## RabbitMQ Management user used for health checks
 managementUsername: management
