@@ -34,7 +34,7 @@ questions:
   required: true
   type: string
   label: Private Registry
-  default: "10.134.200.110:5000"
+  default: "10.57.241.229:5000"
   group: "Global Options"
 # Harbor Expose Service
 - variable: expose.type
