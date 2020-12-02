@@ -308,7 +308,7 @@ advertisedListeners: []
 
 ## Allow to use the PLAINTEXT listener.
 ##
-allowPlaintextListener: false
+allowPlaintextListener: true
 
 ## Name of listener used for communication between brokers.
 ##
