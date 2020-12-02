@@ -132,7 +132,7 @@ listenOnAllIPs: false
 
 ## Allow to accept connections from unauthenticated users
 ##
-allowAnonymousLogin: false
+allowAnonymousLogin: yes
 
 autopurge:
   ## Retains the snapRetainCount most recent snapshots and the corresponding transaction logs and deletes the rest
