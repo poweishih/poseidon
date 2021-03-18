@@ -20,6 +20,10 @@ spec:
       protocol: TCP
       name: http
       targetPort: {{ .Values.httpPort }}
+    - port: 443
+      protocol: TCP
+      name: https
+      targetPort: {{ .Values.httpPort }}
   selector:
     app: {{ .Chart.Name }}
     release: {{ .Release.Name | quote }}
