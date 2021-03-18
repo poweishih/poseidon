@@ -243,7 +243,7 @@ persistentVolumes:
     ##   set, choosing the default provisioner.  (gp2 on AWS, standard on
     ##   GKE, AWS & OpenStack)
     ##
-    # storageClass: "-"
+    storageClass: "-"
     subPath: ""
     mountPath: "/var/lib/postgresql"
     annotations: {}
