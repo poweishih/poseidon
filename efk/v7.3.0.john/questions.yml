@@ -89,6 +89,16 @@ questions:
     required: true
     type: string
     label: Elasticsearch Persistent Volume Size of Node
+- variable: elasticsearch.service.type
+  default: "NodePort"
+  description: "elasticsearch service type"
+  type: enum
+  label: Elasticsearch Service Type
+  required: true
+  group: "Elasticsearch Config"
+  options:
+  - "ClusterIP"
+  - "NodePort"
 # file-beats configs
 - variable: filebeat.enabled
   default: false
