@@ -10,10 +10,10 @@ keywords:
   - producer
   - consumer
 home: https://kafka.apache.org/
+icon: file://../logo-kafka.png
 sources:
   - https://github.com/bitnami/bitnami-docker-kafka
 maintainers:
   - name: Bitnami
     email: containers@bitnami.com
 engine: gotpl
-icon: https://bitnami.com/assets/stacks/kafka/img/kafka-stack-110x117.png

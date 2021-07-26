@@ -7,7 +7,7 @@ keywords:
   - cassandra
   - database
   - nosql
-icon: https://bitnami.com/assets/stacks/cassandra/img/cassandra-stack-220x234.png
+icon: file://../logo-cassandra.png
 sources:
   - https://github.com/bitnami/bitnami-docker-cassandra
 home: http://cassandra.apache.org
