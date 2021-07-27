@@ -3,66 +3,30 @@
 [RabbitMQ](https://www.rabbitmq.com) is an open source message broker software
 that implements the Advanced Message Queuing Protocol (AMQP).
 
-## TL;DR;
-
-```bash
-$ helm install stable/rabbitmq-ha
-```
-
 ## Introduction
 
 This chart bootstraps a [RabbitMQ](https://hub.docker.com/r/_/rabbitmq)
 deployment on a [Kubernetes](http://kubernetes.io) cluster using the
 [Helm](https://helm.sh) package manager.
 
+This helm chart was customization by Poseidom Team.
+
 ## Prerequisites
 
 - Kubernetes 1.9+ with Beta APIs enabled
 - PV provisioner support in the underlying infrastructure
 
-## Installing the Chart
-
-To install the chart with the release name `my-release`:
-
-```bash
-$ helm install --name my-release stable/rabbitmq-ha
-```
-
-The command deploys RabbitMQ on the Kubernetes cluster in the default
-configuration. The [configuration](#configuration) section lists the parameters
-that can be configured during installation.
-
-> **Tip**: List all releases using `helm list`
-
-## Upgrading the Chart
-
-To upgrade the chart, you need to make sure that you are using the same value
-of the `rabbitmqErlangCookie` amongst the releases. If you didn't define it at
-the first place, you can upgrade using the following command:
-
-```
-$ export ERLANGCOOKIE=$(kubectl get secrets -n <NAMESPACE> <HELM_RELEASE_NAME>-rabbitmq-ha -o jsonpath="{.data.rabbitmq-erlang-cookie}" | base64 --decode)
-$ helm upgrade \
-    --set rabbitmqErlangCookie=$ERLANGCOOKIE \
-    <HELM_RELEASE_NAME> stable/rabbitmq-ha
-```
-
-## Uninstalling the Chart
-
-To uninstall/delete the `my-release` deployment:
-
-```bash
-$ helm delete my-release
-```
-
-The command removes all the Kubernetes components associated with the chart and
-deletes the release.
-
-## Configuration
+## Parameters
 
 The following table lists the configurable parameters of the RabbitMQ chart
 and their default values.
 
+### - Poseidon create service parameters
+| Parameter                                         | Description                                                                                                                       | Default                                                 |
+|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+
+
+### - Other parameters
 | Parameter                                          | Description                                                                                                                                                                                           | Default                                                                                             |
 | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `existingConfigMap`                                | Use an existing ConfigMap                                                                                                                                                                             | `false`                                                                                             |
@@ -196,72 +160,6 @@ and their default values.
 | `busyboxImage.tag`                                 | Busybox initContainer image tag                                                                                                                                                                       | `1.30.1`                                                                                            |
 | `busyboxImage.pullPolicy`                          | Busybox initContainer image pullPolicy                                                                                                                                                                | `IfNotPresent`                                                                                      |
 | `clusterDomain`                                    | The internal Kubernetes cluster domain                                                                                                                                                                | `cluster.local`                                                                                     |
-
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
-
-```bash
-$ helm install --name my-release \
-  --set rabbitmqUsername=admin,rabbitmqPassword=secretpassword,managementPassword=anothersecretpassword,rabbitmqErlangCookie=secretcookie \
-    stable/rabbitmq-ha
-```
-
-The above command sets the RabbitMQ admin username and password to `admin` and
-`secretpassword` respectively. Additionally the management user password is set
-to `anothersecretpassword` and the secure erlang cookie is set to
-`secretcookie`.
-
-Alternatively, a YAML file that specifies the values for the parameters can be
-provided while installing the chart. For example,
-
-```bash
-$ helm install --name my-release -f values.yaml stable/rabbitmq-ha
-```
-
-> **Tip**: You can use the default [values.yaml](values.yaml)
-
-### Custom ConfigMap
-
-When creating a new chart with this chart as a dependency, `existingConfigMap`
-can be used to override the default [configmap.yaml](templates/configmap.yaml)
-provided. It also allows for providing additional configuration files that will
-be mounted into `/etc/definitions`. In the parent chart's values.yaml, set the
-value to true and provide the file [templates/configmap.yaml][] for your use
-case.
-
-Example of using RabbitMQ definition to setup users, permissions or policies:
-
-```
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: my-release-rabbitmq-ha
-data:
-  enabled_plugins: |
-    [
-      rabbitmq_consistent_hash_exchange,
-      rabbitmq_federation,
-      rabbitmq_federation_management,
-      rabbitmq_management,
-      rabbitmq_peer_discovery_k8s,
-      rabbitmq_shovel,
-      rabbitmq_shovel_management
-    ].
-  rabbitmq.conf: |
-    # ....
-    management.load_definitions = /etc/definitions/definitions.json
-  definitions.json: |
-    {
-      "permissions": [],
-      "users": [],
-      "policies: []
-    }
-```
-
-Then, install the chart with the above configuration:
-
-```
-$ helm install --name my-release --set existingConfigMap=true stable/rabbitmq-ha
-```
 
 ### Custom Secret
 
