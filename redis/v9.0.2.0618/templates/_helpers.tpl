@@ -50,6 +50,7 @@ Return the appropriate apiVersion for networkpolicy.
 Return the proper Redis image name
 */}}
 {{- define "redis.image" -}}
+{{- $registryName := .Values.image.registry -}}
 {{- $repositoryName := .Values.image.repository -}}
 {{- $tag := .Values.image.tag | toString -}}
 {{/*
@@ -60,7 +61,7 @@ Also, we can't use a single if because lazy evaluation is not an option
 {{- if .Values.global.imageRegistry }}
     {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s:%s" $repositoryName $tag -}}
+    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -68,6 +69,7 @@ Also, we can't use a single if because lazy evaluation is not an option
 Return the proper Redis Sentinel image name
 */}}
 {{- define "sentinel.image" -}}
+{{- $registryName := .Values.sentinel.image.registry -}}
 {{- $repositoryName := .Values.sentinel.image.repository -}}
 {{- $tag := .Values.sentinel.image.tag | toString -}}
 {{/*
@@ -78,7 +80,7 @@ Also, we can't use a single if because lazy evaluation is not an option
 {{- if .Values.global.imageRegistry }}
     {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s:%s" $repositoryName $tag -}}
+    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -97,7 +99,7 @@ Also, we can't use a single if because lazy evaluation is not an option
 {{- if .Values.global.imageRegistry }}
     {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s:%s" $repositoryName $tag -}}
+    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -116,7 +118,7 @@ Also, we can't use a single if because lazy evaluation is not an option
 {{- if .Values.global.imageRegistry }}
     {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s:%s" $repositoryName $tag -}}
+    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
