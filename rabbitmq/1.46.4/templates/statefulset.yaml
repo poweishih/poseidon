@@ -68,11 +68,7 @@ spec:
       initContainers:
 {{- if .Values.initContainer.enabled }}
         - name: bootstrap
-          {{- if .Values.global.imageRegistryEnable }}
-          image: {{ .Values.global.imageRegistry }}/{{ .Values.busyboxImage.repository}}:{{ .Values.busyboxImage.tag}}
-          {{- else }}
-          image: {{ .Values.busyboxImage.repository}}:{{ .Values.busyboxImage.tag}}
-          {{- end }}
+          image: {{ include "rabbitmq.busybox.image" . }}
           imagePullPolicy: {{ .Values.busyboxImage.pullPolicy }}
           securityContext:
 {{- toYaml .Values.initContainer.securityContext | nindent 12 }}
@@ -120,11 +116,7 @@ spec:
 {{- end }}
       containers:
         - name: {{ .Chart.Name }}
-          {{- if .Values.global.imageRegistryEnable }}
-          image: {{ .Values.global.imageRegistry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
-          {{- else }}
-          image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
-          {{- end }}
+          image: {{ include "rabbitmq.image" . }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
             - name: epmd
@@ -236,11 +228,7 @@ spec:
             {{- end }}
         {{ if .Values.prometheus.exporter.enabled }}
         - name: {{ .Chart.Name }}-exporter
-          {{- if .Values.global.imageRegistryEnable }}
-          image: {{ .Values.global.imageRegistry }}/{{ .Values.prometheus.exporter.image.repository }}:{{ .Values.prometheus.exporter.image.tag }}
-          {{- else }}
-          image: {{ .Values.prometheus.exporter.image.repository }}:{{ .Values.prometheus.exporter.image.tag }}
-          {{- end }}
+          image: {{ include "rabbitmq.exporter.image" . }}
           imagePullPolicy: {{ .Values.prometheus.exporter.image.pullPolicy }}
           ports:
           - name: exporter

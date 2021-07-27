@@ -117,3 +117,50 @@ users, virtual hosts, permissions and parameters) to load by the management plug
   ]
 }
 {{- end -}}
+
+{{/*
+==== Image path config ====
+*/}}
+
+{{/*
+Return the proper RabbitMQ image name
+*/}}
+{{- define "rabbitmq.image" -}}
+{{- $repositoryName := .Values.image.repository -}}
+{{- $tag := .Values.image.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper RabbitMQ Busybox image name
+*/}}
+{{- define "rabbitmq.busybox.image" -}}
+{{- $repositoryName := .Values.busyboxImage.repository -}}
+{{- $tag := .Values.busyboxImage.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper RabbitMQ Exporter image name
+*/}}
+{{- define "rabbitmq.exporter.image" -}}
+{{- $repositoryName := .Values.prometheus.exporter.image.repository -}}
+{{- $tag := .Values.prometheus.exporter.image.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+===========================
+*/}}
