@@ -2,18 +2,13 @@
 
 [Kafka](https://www.kafka.org/) is a distributed streaming platform used for building real-time data pipelines and streaming apps. It is horizontally scalable, fault-tolerant, wicked fast, and runs in production in thousands of companies.
 
-## TL;DR;
-
-```console
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install my-release bitnami/kafka
-```
-
 ## Introduction
 
 This chart bootstraps a [Kafka](https://github.com/bitnami/bitnami-docker-kafka) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 Bitnami charts can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters. This Helm chart has been tested on top of [Bitnami Kubernetes Production Runtime](https://kubeprod.io/) (BKPR). Deploy BKPR to get automated TLS certificates, logging and monitoring for your applications.
+
+This helm chart was customization by Poseidom Team.
 
 ## Prerequisites
 
@@ -21,42 +16,28 @@ Bitnami charts can be used with [Kubeapps](https://kubeapps.com/) for deployment
 - Helm 2.12+ or Helm 3.0-beta3+
 - PV provisioner support in the underlying infrastructure
 
-## Installing the Chart
-
-To install the chart with the release name `my-release`:
-
-```console
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm install my-release bitnami/kafka
-```
-
-These commands deploy Kafka on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
-
-> **Tip**: List all releases using `helm list`
-
-## Uninstalling the Chart
-
-To uninstall/delete the `my-release` deployment:
-
-```console
-helm delete my-release
-```
-
-The command removes all the Kubernetes components associated with the chart and deletes the release.
-
 ## Parameters
 
 The following tables lists the configurable parameters of the Kafka chart and their default values per section/component:
 
-### Global parameters
+### Poseidon create service parameters
+| Parameter                                         | Description                                                                                                                       | Default                                                 |
+|---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
+|`global.imageRegistry`                            | Global Docker image registry                                                                                                      | By Poseidon Service Setting                                                   |
+| `logRetentionHours`                               | The minimum age of a log file to be eligible for deletion due to age                                                              | `168`                                                   |
+| `replicaCount`                                    | Number of Kafka nodes                                                                                                             | `3`                                                     |
+| `zookeeper.replicaCount`                          | Number of Zookeeper nodes                                                                                                         | `3`                                                     |
+
+### Other parameters
+
+#### Global parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| `global.imageRegistry`                            | Global Docker image registry                                                                                                      | `nil`                                                   |
 | `global.imagePullSecrets`                         | Global Docker registry secret names as an array                                                                                   | `[]` (does not add image pull secrets to deployed pods) |
 | `global.storageClass`                             | Global storage class for dynamic provisioning                                                                                     | `nil`                                                   |
 
-### Common parameters
+#### Common parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -64,7 +45,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `fullnameOverride`                                | String to fully override kafka.fullname                                                                                           | `nil`                                                   |
 | `clusterDomain`                                   | Default Kubernetes cluster domain                                                                                                 | `cluster.local`                                         |
 
-### Kafka parameters
+#### Kafka parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -86,7 +67,6 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `logFlushIntervalMs`                              | The maximum amount of time a message can sit in a log before we force a flush                                                     | `1000`                                                  |
 | `logRetentionBytes`                               | A size-based retention policy for logs                                                                                            | `_1073741824`                                           |
 | `logRetentionCheckIntervalMs`                     | The interval at which log segments are checked to see if they can be deleted                                                      | `300000`                                                |
-| `logRetentionHours`                               | The minimum age of a log file to be eligible for deletion due to age                                                              | `168`                                                   |
 | `logSegmentBytes`                                 | The maximum size of a log segment file. When this size is reached a new log segment will be created                               | `_1073741824`                                           |
 | `logsDirs`                                        | A comma separated list of directories under which to store log files                                                              | `/bitnami/kafka/data`                                   |
 | `maxMessageBytes`                                 | The largest record batch size allowed by Kafka                                                                                    | `1000012`                                               |
@@ -123,11 +103,10 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `allowPlaintextListener`                          | Allow to use the PLAINTEXT listener                                                                                               | `true`                                                  |
 | `interBrokerListenerName`                         | The listener that the brokers should communicate on                                                                               | `INTERNAL`                                              |
 
-### Statefulset parameters
+#### Statefulset parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| `replicaCount`                                    | Number of Kafka nodes                                                                                                             | `1`                                                     |
 | `updateStrategy`                                  | Update strategy for the stateful set                                                                                              | `RollingUpdate`                                         |
 | `rollingUpdatePartition`                          | Partition update strategy                                                                                                         | `nil`                                                   |
 | `podLabels`                                       | Kafka pod labels                                                                                                                  | `{}` (evaluated as a template)                          |
@@ -149,7 +128,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `pdb.maxUnavailable`                              | Maximum number/percentage of pods that may be made unavailable                                                                    | `1`                                                     |
 | `sidecars`                                        | Attach additional sidecar containers to the Kafka pod                                                                             | `{}`                                                    |
 
-### Exposure parameters
+#### Exposure parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -176,7 +155,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `externalAccess.service.nodePorts`                | Array of node ports used to configure Kafka external listener when service type is NodePort                                       | `[]`                                                    |
 | `externalAccess.service.annotations`              | Service annotations for external access                                                                                           | `{}`(evaluated as a template)                           |
 
-### Persistence parameters
+#### Persistence parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -187,7 +166,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `persistence.size`                                | PVC Storage Request for Kafka data volume                                                                                         | `8Gi`                                                   |
 | `persistence.annotations`                         | Annotations for the PVC                                                                                                           | `{}`(evaluated as a template)                           |
 
-### RBAC parameters
+#### RBAC parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -195,7 +174,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `serviceAccount.name`                             | Name of the created serviceAccount                                                                                                | Generated using the `kafka.fullname` template           |
 | `rbac.create`                                     | Weather to create & use RBAC resources or not                                                                                     | `false`                                                 |
 
-### Volume Permissions parameters
+#### Volume Permissions parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -208,7 +187,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `volumePermissions.resources.limits`              | Init container volume-permissions resource  limits                                                                                | `{}`                                                    |
 | `volumePermissions.resources.requests`            | Init container volume-permissions resource  requests                                                                              | `{}`                                                    |
 
-### Metrics parameters
+#### Metrics parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
@@ -251,31 +230,13 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `metrics.serviceMonitor.scrapeTimeout`            | Timeout after which the scrape is ended                                                                                           | `nil` (Prometheus Operator default value)               |
 | `metrics.serviceMonitor.selector`                 | ServiceMonitor selector labels                                                                                                    | `nil` (Prometheus Operator default value)               |
 
-### Zookeeper chart parameters
+#### Zookeeper chart parameters
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
 | `zookeeper.enabled`                               | Switch to enable or disable the Zookeeper helm chart                                                                              | `true`                                                  |
 | `zookeeper.persistence.enabled`                   | Enable Zookeeper persistence using PVC                                                                                            | `true`                                                  |
 | `externalZookeeper.servers`                       | Server or list of external Zookeeper servers to use                                                                               | `[]`                                                    |
-
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
-
-```console
-helm install my-release \
-  --set replicaCount=3 \
-  bitnami/kafka
-```
-
-The above command deploys Kafka with 3 brokers (replicas).
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
-
-```console
-helm install my-release -f values.yaml bitnami/kafka
-```
-
-> **Tip**: You can use the default [values.yaml](values.yaml)
 
 ## Configuration and installation details
 
