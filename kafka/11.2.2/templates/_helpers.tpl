@@ -74,10 +74,13 @@ We truncate at 63 chars because some Kubernetes name fields are limited to this 
 {{- end -}}
 
 {{/*
+==== Image path config ====
+*/}}
+
+{{/*
 Return the proper Kafka image name
 */}}
 {{- define "kafka.image" -}}
-{{- $registryName := .Values.image.registry -}}
 {{- $repositoryName := .Values.image.repository -}}
 {{- $tag := .Values.image.tag | toString -}}
 {{/*
@@ -85,14 +88,10 @@ Helm 2.11 supports the assignment of a value to a variable defined in a differen
 but Helm 2.9 and 2.10 doesn't support it, so we need to implement this if-else logic.
 Also, we can't use a single if because lazy evaluation is not an option
 */}}
-{{- if .Values.global }}
-    {{- if .Values.global.imageRegistry }}
-        {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
-    {{- else -}}
-        {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-    {{- end -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -100,7 +99,6 @@ Also, we can't use a single if because lazy evaluation is not an option
 Return the proper image name (for the init container auto-discovery image)
 */}}
 {{- define "kafka.externalAccess.autoDiscovery.image" -}}
-{{- $registryName := .Values.externalAccess.autoDiscovery.image.registry -}}
 {{- $repositoryName := .Values.externalAccess.autoDiscovery.image.repository -}}
 {{- $tag := .Values.externalAccess.autoDiscovery.image.tag | toString -}}
 {{/*
@@ -108,14 +106,10 @@ Helm 2.11 supports the assignment of a value to a variable defined in a differen
 but Helm 2.9 and 2.10 doesn't support it, so we need to implement this if-else logic.
 Also, we can't use a single if because lazy evaluation is not an option
 */}}
-{{- if .Values.global }}
-    {{- if .Values.global.imageRegistry }}
-        {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
-    {{- else -}}
-        {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-    {{- end -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -123,7 +117,6 @@ Also, we can't use a single if because lazy evaluation is not an option
 Return the proper image name (for the init container volume-permissions image)
 */}}
 {{- define "kafka.volumePermissions.image" -}}
-{{- $registryName := .Values.volumePermissions.image.registry -}}
 {{- $repositoryName := .Values.volumePermissions.image.repository -}}
 {{- $tag := .Values.volumePermissions.image.tag | toString -}}
 {{/*
@@ -131,14 +124,10 @@ Helm 2.11 supports the assignment of a value to a variable defined in a differen
 but Helm 2.9 and 2.10 doesn't support it, so we need to implement this if-else logic.
 Also, we can't use a single if because lazy evaluation is not an option
 */}}
-{{- if .Values.global }}
-    {{- if .Values.global.imageRegistry }}
-        {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
-    {{- else -}}
-        {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-    {{- end -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -146,7 +135,6 @@ Also, we can't use a single if because lazy evaluation is not an option
 Return the proper Kafka exporter image name
 */}}
 {{- define "kafka.metrics.kafka.image" -}}
-{{- $registryName := .Values.metrics.kafka.image.registry -}}
 {{- $repositoryName := .Values.metrics.kafka.image.repository -}}
 {{- $tag := .Values.metrics.kafka.image.tag | toString -}}
 {{/*
@@ -154,14 +142,10 @@ Helm 2.11 supports the assignment of a value to a variable defined in a differen
 but Helm 2.9 and 2.10 doesn't support it, so we need to implement this if-else logic.
 Also, we can't use a single if because lazy evaluation is not an option
 */}}
-{{- if .Values.global }}
-    {{- if .Values.global.imageRegistry }}
-        {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
-    {{- else -}}
-        {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-    {{- end -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
 
@@ -169,7 +153,6 @@ Also, we can't use a single if because lazy evaluation is not an option
 Return the proper JMX exporter image name
 */}}
 {{- define "kafka.metrics.jmx.image" -}}
-{{- $registryName := .Values.metrics.jmx.image.registry -}}
 {{- $repositoryName := .Values.metrics.jmx.image.repository -}}
 {{- $tag := .Values.metrics.jmx.image.tag | toString -}}
 {{/*
@@ -177,16 +160,17 @@ Helm 2.11 supports the assignment of a value to a variable defined in a differen
 but Helm 2.9 and 2.10 doesn't support it, so we need to implement this if-else logic.
 Also, we can't use a single if because lazy evaluation is not an option
 */}}
-{{- if .Values.global }}
-    {{- if .Values.global.imageRegistry }}
-        {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
-    {{- else -}}
-        {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
-    {{- end -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
 {{- else -}}
-    {{- printf "%s/%s:%s" $registryName $repositoryName $tag -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+===========================
+*/}}
+
 
 {{/*
 Return the proper Docker Image Registry Secret Names
