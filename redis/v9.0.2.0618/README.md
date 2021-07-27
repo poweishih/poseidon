@@ -1,10 +1,24 @@
-## Configuration
+# Redis
+
+This helm chart was customization by Poseidom Team.
+
+## Parameters
 
 The following table lists the configurable parameters of the Redis chart and their default values.
 
+### - Poseidon create service parameters
 | Parameter                                     | Description                                                                                                                                         | Default                                                 |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| `global.imageRegistry`                        | Global Docker image registry                                                                                                                        | `nil`                                                   |
+| `global.imageRegistry`                        | Global Docker image registry                                                                                                                        | By Poseidon Service Setting                             |
+| `cluster.enabled`                             | Use master-slave topology                                                                                                                           | `false`                                                 |
+| `cluster.slaveCount`                          | Number of slaves                                                                                                                                    | `2`                                                     |
+| `sentinel.enabled`                            | Enable sentinel containers. If cluster was enable, this value was set 'true'.                                                                       | `false`                                                 |
+| `usePassword`                                 | Use password                                                                                                                                        | `true`                                                  |
+| `password`                                    | Redis password (ignored if existingSecret set)                                                                                                      | Randomly generated                                      |
+
+### - Other parameters
+| Parameter                                     | Description                                                                                                                                         | Default                                                 |
+|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
 | `global.imagePullSecrets`                     | Global Docker registry secret names as an array                                                                                                     | `[]` (does not add image pull secrets to deployed pods) |
 | `image.registry`                              | Redis Image registry                                                                                                                                | `docker.io`                                             |
 | `image.repository`                            | Redis Image name                                                                                                                                    | `bitnami/redis`                                         |
@@ -13,12 +27,8 @@ The following table lists the configurable parameters of the Redis chart and the
 | `image.pullSecrets`                           | Specify docker-registry secret names as an array                                                                                                    | `nil`                                                   |
 | `nameOverride`                                | String to partially override redis.fullname template with a string (will prepend the release name)                                                  | `nil`                                                   |
 | `fullnameOverride`                            | String to fully override redis.fullname template with a string                                                                                      | `nil`                                                   |
-| `cluster.enabled`                             | Use master-slave topology                                                                                                                           | `true`                                                  |
-| `cluster.slaveCount`                          | Number of slaves                                                                                                                                    | `1`                                                     |
 | `existingSecret`                              | Name of existing secret object (for password authentication)                                                                                        | `nil`                                                   |
-| `usePassword`                                 | Use password                                                                                                                                        | `true`                                                  |
 | `usePasswordFile`                             | Mount passwords as files instead of environment variables                                                                                           | `false`                                                 |
-| `password`                                    | Redis password (ignored if existingSecret set)                                                                                                      | Randomly generated                                      |
 | `configmap`                                   | Additional common Redis node configuration                                                                                                          | See values.yaml                                         |
 | `clusterDomain`                               | Kubernetes DNS Domain name to use                                                                                                                   | `cluster.local`                                         |
 | `networkPolicy.enabled`                       | Enable NetworkPolicy                                                                                                                                | `false`                                                 |
@@ -128,7 +138,6 @@ The following table lists the configurable parameters of the Redis chart and the
 | `slave.resources`                             | Redis slave CPU/Memory resource requests/limits                                                                                                     | `{}`                                                    |
 | `slave.affinity`                              | Enable node/pod affinity for slaves                                                                                                                 | {}                                                      |
 | `slave.priorityClassName`                     | Redis Slave pod priorityClassName                                                                                                                   | {}                                                      |
-| `sentinel.enabled`                            | Enable sentinel containers                                                                                                                          | `false`                                                 |
 | `sentinel.masterSet`                          | Name of the sentinel master set                                                                                                                     | `mymaster`                                              |
 | `sentinel.initialCheckTimeout`                | Timeout for querying the redis sentinel service for the active sentinel list                                                                        | `5`                                                     |
 | `sentinel.quorum`                             | Quorum for electing a new master                                                                                                                    | `2`                                                     |
@@ -172,33 +181,7 @@ The following table lists the configurable parameters of the Redis chart and the
 | `sysctlImage.mountHostSys`                    | Mount the host `/sys` folder to `/host-sys`                                                                                                         | `false`                                                 |
 | `sysctlImage.resources`                       | sysctlImage Init container CPU/Memory resource requests/limits                                                                                      | {}                                                      |
 
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
-
-```bash
-$ helm install --name my-release \
-  --set password=secretpassword \
-    stable/redis
-```
-
-The above command sets the Redis server password to `secretpassword`.
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
-
-```bash
-$ helm install --name my-release -f values.yaml stable/redis
-```
-
-> **Tip**: You can use the default [values.yaml](values.yaml)
-
-> **Note for minikube users**: Current versions of minikube (v0.24.1 at the time of writing) provision `hostPath` persistent volumes that are only writable by root. Using chart defaults cause pod failure for the Redis pod as it attempts to write to the `/bitnami` directory. Consider installing Redis with `--set persistence.enabled=false`. See minikube issue [1990](https://github.com/kubernetes/minikube/issues/1990) for more information.
-
 ### Production configuration
-
-This chart includes a `values-production.yaml` file where you can find some parameters oriented to production configuration in comparison to the regular `values.yaml`.
-
-```console
-$ helm install --name my-release -f ./values-production.yaml stable/redis
-```
 
 - Number of slaves:
 ```diff
@@ -238,20 +221,6 @@ the DefaultDeny namespace annotation. Note: this will enforce policy for _all_ p
 With NetworkPolicy enabled, only pods with the generated client label will be
 able to connect to Redis. This label will be displayed in the output
 after a successful install.
-
-## Persistence
-
-By default, the chart mounts a [Persistent Volume](http://kubernetes.io/docs/user-guide/persistent-volumes/) at the `/data` path. The volume is created using dynamic volume provisioning. If a Persistent Volume Claim already exists, specify it during installation.
-
-### Existing PersistentVolumeClaim
-
-1. Create the PersistentVolume
-2. Create the PersistentVolumeClaim
-3. Install the chart
-
-```bash
-$ helm install --set persistence.existingClaim=PVC_NAME stable/redis
-```
 
 ## Metrics
 
