@@ -20,7 +20,7 @@ This helm chart was customization by Poseidom Team.
 
 The following tables lists the configurable parameters of the Kafka chart and their default values per section/component:
 
-### Poseidon create service parameters
+### - Poseidon create service parameters
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
 |`global.imageRegistry`                            | Global Docker image registry                                                                                                      | By Poseidon Service Setting                                                   |
@@ -28,7 +28,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `replicaCount`                                    | Number of Kafka nodes                                                                                                             | `3`                                                     |
 | `zookeeper.replicaCount`                          | Number of Zookeeper nodes                                                                                                         | `3`                                                     |
 
-### Other parameters
+### - Other parameters
 
 #### Global parameters
 
