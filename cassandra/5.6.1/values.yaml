@@ -2,8 +2,8 @@
 ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
 ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
-# global:
-#   imageRegistry: myRegistryName
+global:
+  imageRegistry:
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
 #   storageClass: myStorageClass
@@ -17,7 +17,7 @@ image:
   ## Bitnami Cassandra image tag
   ## ref: https://github.com/bitnami/bitnami-docker-cassandra#supported-tags-and-respective-dockerfile-links
   ##
-  tag: 3.11.7-debian-10-r4
+  tag: v20201021
   ## Specify a imagePullPolicy
   ## Defaults to 'Always' if image tag is 'latest', else set to 'IfNotPresent'
   ## ref: http://kubernetes.io/docs/user-guide/images/#pre-pulling-images
@@ -208,7 +208,7 @@ jvm:
 ##
 dbUser:
   user: cassandra
-  forcePassword: false
+  forcePassword: true
   # password:
   # existingSecret:
 

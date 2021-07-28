@@ -2,18 +2,13 @@
 
 [Apache Cassandra](https://cassandra.apache.org) is a free and open-source distributed database management system designed to handle large amounts of data across many commodity servers or datacenters.
 
-## TL;DR
-
-```console
-$ helm repo add bitnami https://charts.bitnami.com/bitnami
-$ helm install my-release bitnami/cassandra
-```
-
 ## Introduction
 
 This chart bootstraps a [Cassandra](https://github.com/bitnami/bitnami-docker-cassandra) deployment on a [Kubernetes](http://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
 Bitnami charts can be used with [Kubeapps](https://kubeapps.com/) for deployment and management of Helm Charts in clusters. This Helm chart has been tested on top of [Bitnami Kubernetes Production Runtime](https://kubeprod.io/) (BKPR). Deploy BKPR to get automated TLS certificates, logging and monitoring for your applications.
+
+This helm chart was customization by Poseidom Team.
 
 ## Prerequisites
 
@@ -21,36 +16,25 @@ Bitnami charts can be used with [Kubeapps](https://kubeapps.com/) for deployment
 - Helm 2.12+ or Helm 3.0-beta3+
 - PV provisioner support in the underlying infrastructure
 
-## Installing the Chart
-
-To install the chart with the release name `my-release`:
-
-```console
-$ helm repo add bitnami https://charts.bitnami.com/bitnami
-$ helm install my-release bitnami/cassandra
-```
-
-These commands deploy one node with Cassandra on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
-
-> **Tip**: List all releases using `helm list`
-
-## Uninstalling the Chart
-
-To uninstall/delete the `my-release` release:
-
-```console
-$ helm delete my-release
-```
-
-The command removes all the Kubernetes components associated with the chart and deletes the release.
-
 ## Parameters
 
 The following tables lists the configurable parameters of the cassandra chart and their default values.
 
+### - Simple create service parameters
+
 | Parameter                              | Description                                                                                                                                               | Default                                                      |
 |----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
-| `global.imageRegistry`                 | Global Docker Image registry                                                                                                                              | `nil`                                                        |
+| `global.imageRegistry`                 | Global Docker Image registry                                                                                                                              | By Poseidon Service Setting                                  |
+| `dbUser.forcePassword`                 | Force the user to provide a non-empty password for `dbUser.user`                                                                                          | `true`                                                      |
+| `dbUser.user`                          | Cassandra admin user                                                                                                                                      | `cassandra`                                                  |
+| `dbUser.password`                      | Password for `dbUser.user`. Randomly generated if empty                                                                                                   | (Random generated)                                           |
+| `cluster.replicaCount`                 | Number of Cassandra nodes                                                                                                                                 | `1`                                                          |
+| `cluster.seedCount`                    | Number of seed nodes (note: must be greater or equal than 1 and less or equal to `cluster.replicaCount`)                                                  | `1`                                                          |
+
+### - Other parameters
+
+| Parameter                              | Description                                                                                                                                               | Default                                                      |
+|----------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
 | `global.imagePullSecrets`              | Global Docker registry secret names as an array                                                                                                           | `[]` (does not add image pull secrets to deployed pods)      |
 | `global.storageClass`                  | Global storage class for dynamic provisioning                                                                                                             | `nil`                                                        |
 | `image.registry`                       | Cassandra Image registry                                                                                                                                  | `docker.io`                                                  |
@@ -92,8 +76,6 @@ The following tables lists the configurable parameters of the cassandra chart an
 | `resources`                            | CPU/Memory resource requests/limits                                                                                                                       | `{}`                                                         |
 | `existingConfiguration`                | Pointer to a configMap that contains custom Cassandra configuration files. This will override any Cassandra configuration variable set in the chart       | `nil` (evaluated as a template)                              |
 | `cluster.name`                         | Cassandra cluster name                                                                                                                                    | `cassandra`                                                  |
-| `cluster.replicaCount`                 | Number of Cassandra nodes                                                                                                                                 | `1`                                                          |
-| `cluster.seedCount`                    | Number of seed nodes (note: must be greater or equal than 1 and less or equal to `cluster.replicaCount`)                                                  | `1`                                                          |
 | `cluster.numTokens`                    | Number of tokens for each node                                                                                                                            | `256`                                                        |
 | `cluster.datacenter`                   | Datacenter name                                                                                                                                           | `dc1`                                                        |
 | `cluster.rack`                         | Rack name                                                                                                                                                 | `rack1`                                                      |
@@ -108,9 +90,6 @@ The following tables lists the configurable parameters of the cassandra chart an
 | `jvm.extraOpts`                        | Set the value for Java Virtual Machine extra optinos (JVM_EXTRA_OPTS)                                                                                     | `nil`                                                        |
 | `jvm.maxHeapSize`                      | Set Java Virtual Machine maximum heap size (MAX_HEAP_SIZE). Calculated automatically if `nil`                                                             | `nil`                                                        |
 | `jvm.newHeapSize`                      | Set Java Virtual Machine new heap size (HEAP_NEWSIZE). Calculated automatically if `nil`                                                                  | `nil`                                                        |
-| `dbUser.user`                          | Cassandra admin user                                                                                                                                      | `cassandra`                                                  |
-| `dbUser.forcePassword`                 | Force the user to provide a non-empty password for `dbUser.user`                                                                                          | `false`                                                      |
-| `dbUser.password`                      | Password for `dbUser.user`. Randomly generated if empty                                                                                                   | (Random generated)                                           |
 | `dbUser.existingSecret`                | Use an existing secret object for `dbUser.user` password (will ignore `dbUser.password`)                                                                  | `nil`                                                        |
 | `initDBConfigMap`                      | Configmap for initialization CQL commands (done in the first node). Useful for creating keyspaces at startup, for instance                                | `nil` (evaluated as a template)                              |
 | `initDBSecret`                         | Secret for initialization CQL commands (done in the first node) that contain sensitive data. Useful for creating keyspaces at startup, for instance       | `nil` (evaluated as a template)                              |
@@ -146,23 +125,6 @@ The following tables lists the configurable parameters of the cassandra chart an
 | `metrics.podAnnotations`               | Additional annotations for Metrics exporter                                                                                                               | `{prometheus.io/scrape: "true", prometheus.io/port: "8080"}` |
 | `metrics.resources`                    | Exporter resource requests/limit                                                                                                                          | `{}`                                                         |
 
-The above parameters map to the env variables defined in [bitnami/cassandra](http://github.com/bitnami/bitnami-docker-cassandra). For more information please refer to the [bitnami/cassandra](http://github.com/bitnami/bitnami-docker-cassandra) image documentation.
-
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
-
-```console
-helm install my-release \
-    --set dbUser.user=admin,dbUser.password=password\
-    bitnami/cassandra
-```
-
-Alternatively, a YAML file that specifies the values for the above parameters can be provided while installing the chart. For example,
-
-```console
-helm install my-release -f values.yaml bitnami/cassandra
-```
-
-> **Tip**: You can use the default [values.yaml](values.yaml)
 
 ## Configuration and installation details
 
