@@ -18,6 +18,7 @@ The following table lists the configurable parameters of the Redis chart and the
 | `password`                                    | Redis password (ignored if existingSecret set)                                                                                                      | Randomly generated                                      |
 
 ### - Other parameters
+
 | Parameter                                     | Description                                                                                                                                         | Default                                                 |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
 | `global.imagePullSecrets`                     | Global Docker registry secret names as an array                                                                                                     | `[]` (does not add image pull secrets to deployed pods) |

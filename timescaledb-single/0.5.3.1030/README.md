@@ -5,6 +5,8 @@ Please see the included NOTICE for copyright information and LICENSE for a copy 
 
 # TimescaleDB Single
 
+This helm chart was customization by Poseidom Team.
+
 This directory contains a Helm chart to deploy a three
 node [TimescaleDB](https://github.com/timescale/timescaledb/) cluster in a
 High Availability (HA) configuration on Kubernetes. This chart will do the following:
@@ -28,32 +30,66 @@ When configured for Backups to S3:
 
 <img src="./timescaledb-single-backups.png" width="640" />
 
+## Parameters
+The following table lists the configurable parameters of the TimescaleDB Helm chart and their default values.
 
-## Installing
+### - Simple create service parameters
+|       Parameter                   |           Description                       |                         Default                     |
+|-----------------------------------|---------------------------------------------|-----------------------------------------------------|
+| `global.imageRegistry`            | Global Docker image registry                | By Poseidon Service Setting                         |
+| `credentials.postgres`            | Set password for postgres                   | `postgres`                                          |
+| `credentials.admin`               | Set password for admin                      | `admin`                                             |
 
-To install the chart with the release name `my-release`:
+### - Other parameters
 
-```console
-helm install --name my-release charts/timescaledb-single
-```
-
-You can override parameters using the `--set key=value[,key=value]` argument to `helm install`,
-e.g., to install the chart with randomly generated passwords:
-
-```console
-random_password () { < /dev/urandom tr -dc _A-Z-a-z-0-9 | head -c32; }
-helm install --name my-release charts/timescaledb-single \
-    --set credentials.postgres="$(random_password)" \
-    --set credentials.admin="$(random_password)" \
-    --set credentials.standby="$(random_password)"
-```
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
-```console
-helm install --name my-release -f myvalues.yaml charts/timescaledb-single
-```
-
-For details about what parameters you can set, have a look at the [Administrator Guide](admin-guide.md#configure)
+|       Parameter                   |           Description                       |                         Default                     |
+|-----------------------------------|---------------------------------------------|-----------------------------------------------------|
+| `nameOverride`                    | Override the name of the chart              | `timescaledb`                                       |
+| `clusterName`                     | Override the name of the PostgreSQL cluster | Equal to the Helm release name                      |
+| `fullnameOverride`                | Override the fullname of the chart          | `nil`                                               |
+| `replicaCount`                    | Amount of pods to spawn                     | `3`                                                 |
+| `image.repository`                | The image to pull                           | `timescaledev/timescaledb-ha`                       |
+| `image.tag`                       | The version of the image to pull            | `pg11-ts1.6`                                        |
+| `image.pullPolicy`                | The pull policy                             | `IfNotPresent`                                      |
+| `tls.cert`                        | The public key of the SSL certificate for PostgreSQL | empty (a self-signed certificate will be generated) |
+| `tls.key`                         | The private key of the SSL Certificate for PostgreSQL | empty                                     |
+| `backup.enabled`                  | Schedule backups to occur                   | `false`                                             |
+| `backup.pgBackRest`               | [pgBackRest configuration](https://github.com/timescale/timescaledb-kubernetes/blob/master/charts/timescaledb-single/values.yaml)     | Working defaults |
+| `backup.jobs`                     | A list of backup schedules and types        | 1 full weekly backup, 1 incremental daily backup    |
+| `env`                             | Extra custom environment variables, expressed as [EnvVar](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.16/#envvarsource-v1-core)          | `[]`                                                |
+| `patroni`                         | Specify your specific [Patroni Configuration](https://patroni.readthedocs.io/en/latest/SETTINGS.html) | A full Patroni configuration |
+| `callbacks.configMap`             | A kubernetes ConfigMap containing [Patroni callbacks](#callbacks) | `nil`                         |
+| `resources`                       | Any resources you wish to assign to the pod | `{}`                                                |
+| `nodeSelector`                    | Node label to use for scheduling            | `{}`                                                |
+| `tolerations`                     | List of node taints to tolerate             | `[]`                                                |
+| `affinityTemplate`                | A template string to use to generate the affinity settings | Anti-affinity preferred on hostname and (availability) zone |
+| `affinity`                        | Affinity settings. Overrides `affinityTemplate` if set. | `{}`                                    |
+| `schedulerName`                   | Alternate scheduler name                    | `nil`                                               |
+| `loadBalancer.enabled`            | If enabled, creates a LB for the primary    | `true`                                              |
+| `loadBalancer.annotations`        | Pass on annotations to the Load Balancer    | An AWS ELB annotation to increase the idle timeout  |
+| `networkPolicy.enabled`           | If enabled, creates a NetworkPolicy for controlling network access | `false`
+| `networkPolicy.ingress`           | A list of Ingress rules to extend the base NetworkPolicy | `nil`
+| `networkPolicy.prometheusApp`     | Name of Prometheus app to allow it to scrape exporters | `prometheus`
+| `replicaLoadBalancer.enabled`     | If enabled, creates a LB for replica's only | `false`                                             |
+| `replicaLoadBalancer.annotations` | Pass on annotations to the Load Balancer    | An AWS ELB annotation to increase the idle timeout  |
+| `prometheus.enabled`              | If enabled, run a [postgres\_exporter](https://github.com/wrouesnel/postgres_exporter) sidecar | `false` |
+| `prometheus.image.repository`     | The postgres\_exporter docker repo          | `wrouesnel/postgres_exporter`                       |
+| `prometheus.image.tag`            | The tag of the postgres\_exporter image     | `v0.7.0`                                            |
+| `prometheus.image.pullPolicy`     | The pull policy for the postgres\_exporter  | `IfNotPresent`                                      |
+| `persistentVolumes.data.enabled`  | If enabled, use a Persistent Data Volume    | `true`                                              |
+| `persistentVolumes.data.mountPath`| Persistent Data Volume mount root path      | `/var/lib/postgresql/`                              |
+| `persistentVolumes.wal.enabled`   | If enabled, use a Persistent Wal Volume. If disabled, WAL will be on the Data Volume | `true`     |
+| `persistentVolumes.wal.mountPath` | Persistent Wal Volume mount root path       | `/var/lib/postgresql/wal/`                          |
+| `persistentVolumes.<name>.accessModes` | Persistent Volume access modes         | `[ReadWriteOnce]`                                   |
+| `persistentVolumes.<name>.annotations` | Annotations for Persistent Volume Claim| `{}`                                                |
+| `persistentVolumes.<name>.size`   | Persistent Volume size                      | `2Gi`                                               |
+| `persistentVolumes.<name>.storageClass`| Persistent Volume Storage Class        | `volume.alpha.kubernetes.io/storage-class: default` |
+| `persistentVolumes.<name>.subPath`| Subdirectory of Persistent Volume to mount  | `""`                                                |
+| `persistentVolumes.tablespaces`   | A mapping of tablespaces and Volumes        | `nil`, see [multiple-tablespaces.yaml](values/multiple-tablespaces.yaml) for a full example |
+| `rbac.create`                     | Create required role and rolebindings       | `true`                                              |
+| `serviceAccount.create`           | If true, create a new service account       | `true`                                              |
+| `serviceAccount.name`             | Service account to be used. If not set and `serviceAccount.create` is `true`, a name is generated using the fullname template | `nil` |
+| `timescaledbTune.enabled`         | If true, runs `timescaledb-tune` before starting PostgreSQL | `false`                             |
 
 ## Connecting to TimescaleDBs
 
@@ -107,15 +143,6 @@ kubectl exec -ti $(kubectl get pod -o name -l role=master,release=$RELEASE) psql
 ## Create backups to S3
 The backup is disabled by default, look at the
 [Administrator Guide](admin-guide.md#backups) on how to configure backup location, credentials, schedules, etc.
-
-## Cleanup
-
-To remove the spawned pods you can run a simple
-```console
-helm delete my-release
-```
-Some items, (pvc's and S3 backups for example) are not immediately removed.
-To also purge these items, have a look at the [Administrator Guide](admin-guide.md#cleanup)
 
 ## Further reading
 

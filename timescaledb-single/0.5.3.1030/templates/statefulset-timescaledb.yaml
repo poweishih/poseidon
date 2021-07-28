@@ -40,7 +40,7 @@ spec:
       initContainers:
 {{- if .Values.timescaledbTune.enabled }}
       - name: tstune
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: {{ include "timescale.image" . }}
         env:
         - name: TSTUNE_FILE
           value: {{ template "tstune_config" . }}
@@ -115,7 +115,7 @@ spec:
 {{- end }}
       containers:
       - name: timescaledb
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: {{ include "timescale.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         # When reusing an already existing volume it sometimes happens that the permissions
         # of the PGDATA and/or wal directory are incorrect. To guard against this, we always correctly
@@ -261,7 +261,7 @@ spec:
 
 {{- if or .Values.backup.enabled .Values.backup.enable }}
       - name: pgbackrest
-        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        image: {{ include "timescale.image" . }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
           - {{ template "scripts_dir" . }}/pgbackrest_bootstrap.sh
@@ -303,7 +303,7 @@ spec:
 
 {{- if .Values.prometheus.enabled }}
       - name: postgres-exporter
-        image: "{{ .Values.prometheus.image.repository }}:{{ .Values.prometheus.image.tag }}"
+        image: {{ include "timescale.prometheus.image" . }}
         imagePullPolicy: {{ .Values.prometheus.image.pullPolicy }}
         securityContext:
           runAsUser: 1000

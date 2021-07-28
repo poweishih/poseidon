@@ -1,5 +1,7 @@
 # This file and its contents are licensed under the Apache License 2.0.
 # Please see the included NOTICE for copyright information and LICENSE for a copy of the license.
+global:
+  imageRegistry:
 
 replicaCount: 3
 
@@ -22,10 +24,10 @@ image:
 # Credentials used by PostgreSQL and Patroni
 # https://github.com/zalando/patroni/blob/master/docs/SETTINGS.rst#postgresql
 credentials:
-  admin: cola
+  admin: admin
   # the postgres and standby users are vital for Patroni, and therefore should not be
   # removed altogether.
-  postgres: tea
+  postgres: postgres
   standby: pinacolada
 
 # To set your own certificate (instead of autogenerating one), you can add
@@ -319,7 +321,7 @@ nodeSelector: {}
 # Prometheus exporter for PostgreSQL server metrics.
 # https://github.com/wrouesnel/postgres_exporter
 prometheus:
-  enabled: True
+  enabled: false
   image:
     repository: wrouesnel/postgres_exporter
     tag: v0.7.0

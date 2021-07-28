@@ -77,3 +77,37 @@ Create the name of the service account to use.
 {{- define "tstune_config" -}}
 {{ printf "%s/timescaledb.conf" (include "socket_directory" .) }}
 {{- end -}}
+
+{{/*
+==== Image path config ====
+*/}}
+
+{{/*
+Return the proper TimescaleDB image name
+*/}}
+{{- define "timescale.image" -}}
+{{- $repositoryName := .Values.image.repository -}}
+{{- $tag := .Values.image.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper Prometheus image name
+*/}}
+{{- define "timescale.prometheus.image" -}}
+{{- $repositoryName := .Values.prometheus.image.repository -}}
+{{- $tag := .Values.prometheus.image.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+===========================
+*/}}
