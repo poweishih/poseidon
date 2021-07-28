@@ -1,26 +1,44 @@
+# MongoDB
+
+This helm chart was customization by Poseidom Team.
+
 ## Prerequisites
 
 - Kubernetes 1.4+ with Beta APIs enabled
 - PV provisioner support in the underlying infrastructure
 
-## Configuration
+## Parameters
 
 The following table lists the configurable parameters of the MongoDB chart and their default values.
 
+### - Simple create service parameters
+
 | Parameter                               | Description                                                                                  | Default                                     |
 | --------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| `global.imageRegistry`                  | Global Docker image registry                                                                 | `nil`                                       |
-| `image.registry`                        | MongoDB image registry                                                                       | `docker.io`                                 |
-| `image.repository`                      | MongoDB Image name                                                                           | `bitnami/mongodb`                           |
-| `image.tag`                             | MongoDB Image tag                                                                            | `{VERSION}`                                 |
-| `image.pullPolicy`                      | Image pull policy                                                                            | `Always`                                    |
-| `image.pullSecrets`                     | Specify image pull secrets                                                                   | `nil`                                       |
+| `global.imageRegistry`                  | Global Docker image registry                                                                 | By Poseidon Service Setting                 |
+| `mongodbDatabase`                       | Database to create                                                                           | `nil`                                       |
 | `usePassword`                           | Enable password authentication                                                               | `true`                                      |
-| `existingSecret`                        | Existing secret with MongoDB credentials                                                     | `nil`                                       |
 | `mongodbRootPassword`                   | MongoDB admin password                                                                       | `random alhpanumeric string (10)`           |
 | `mongodbUsername`                       | MongoDB custom user                                                                          | `nil`                                       |
 | `mongodbPassword`                       | MongoDB custom user password                                                                 | `random alhpanumeric string (10)`           |
-| `mongodbDatabase`                       | Database to create                                                                           | `nil`                                       |
+| `replicaSet.enabled`                    | Switch to enable/disable replica set configuration                                           | `false`                                     |
+| `replicaSet.name`                       | Name of the replica set                                                                      | `rs0`                                       |
+| `replicaSet.key`                        | Key used for authentication in the replica set                                               | `nil`                                       |
+| `replicaSet.replicas.secondary`         | Number of secondary nodes in the replica set                                                 | `2`                                         |
+| `replicaSet.replicas.arbiter`           | Number of arbiter nodes in the replica set                                                   | `0`                                         |
+| `replicaSet.pdb.minAvailable.primary`   | PDB for the MongoDB Primary nodes                                                            | `1`                                         |
+| `replicaSet.pdb.minAvailable.secondary` | PDB for the MongoDB Secondary nodes                                                          | `2`                                         |
+| `replicaSet.pdb.minAvailable.arbiter`   | PDB for the MongoDB Arbiter nodes                                                            | `0`                                         |
+
+### - Other parameters
+
+| Parameter                               | Description                                                                                  | Default                                     |
+| --------------------------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------- |
+| `image.repository`                      | MongoDB Image name                                                                           | `bitnami-mongodb-f`                         |
+| `image.tag`                             | MongoDB Image tag                                                                            | `v20200217`                                 |
+| `image.pullPolicy`                      | Image pull policy                                                                            | `Always`                                    |
+| `image.pullSecrets`                     | Specify image pull secrets                                                                   | `nil`                                       |
+| `existingSecret`                        | Existing secret with MongoDB credentials                                                     | `nil`                                       |
 | `mongodbEnableIPv6`                     | Switch to enable/disable IPv6 on MongoDB                                                     | `true`                                      |
 | `mongodbExtraFlags`                     | MongoDB additional command line flags                                                        | []                                          |
 | `service.annotations`                   | Kubernetes service annotations                                                               | `{}`                                        |
@@ -28,15 +46,7 @@ The following table lists the configurable parameters of the MongoDB chart and t
 | `service.clusterIP`                     | Static clusterIP or None for headless services                                               | `nil`                                       |
 | `service.nodePort`                      | Port to bind to for NodePort service type                                                    | `nil`                                       |
 | `port`                                  | MongoDB service port                                                                         | `27017`                                     |
-| `replicaSet.enabled`                    | Switch to enable/disable replica set configuration                                           | `false`                                     |
-| `replicaSet.name`                       | Name of the replica set                                                                      | `rs0`                                       |
 | `replicaSet.useHostnames`               | Enable DNS hostnames in the replica set config                                               | `true`                                      |
-| `replicaSet.key`                        | Key used for authentication in the replica set                                               | `nil`                                       |
-| `replicaSet.replicas.secondary`         | Number of secondary nodes in the replica set                                                 | `1`                                         |
-| `replicaSet.replicas.arbiter`           | Number of arbiter nodes in the replica set                                                   | `1`                                         |
-| `replicaSet.pdb.minAvailable.primary`   | PDB for the MongoDB Primary nodes                                                            | `1`                                         |
-| `replicaSet.pdb.minAvailable.secondary` | PDB for the MongoDB Secondary nodes                                                          | `1`                                         |
-| `replicaSet.pdb.minAvailable.arbiter`   | PDB for the MongoDB Arbiter nodes                                                            | `1`                                         |
 | `podAnnotations`                        | Annotations to be added to pods                                                              | {}                                          |
 | `podLabels`                             | Additional labels for the pod(s).                                                            | {}                                          |
 | `resources`                             | Pod resources                                                                                | {}                                          |
@@ -64,37 +74,18 @@ The following table lists the configurable parameters of the MongoDB chart and t
 | `readinessProbe.successThreshold`       | Minimum consecutive successes for the probe to be considered successful after having failed. | `1`                                         |
 | `configmap`                             | MongoDB configuration file to be used                                                        | `nil`                                       |
 | `metrics.enabled`                       | Start a side-car prometheus exporter                                                         | `false`                                     |
-| `metrics.image.registry`                | MongoDB exporter image registry                                                              | `docker.io`                                 |
-| `metrics.image.repository`              | MongoDB exporter image name                                                                  | `forekshub/percona-mongodb-exporter`                           |
-| `metrics.image.tag`                     | MongoDB exporter image tag                                                                   | `latest`                                    |
+| `metrics.image.repository`              | MongoDB exporter image name                                                                  | `bitnami-mongodb-exporter`                  |
+| `metrics.image.tag`                     | MongoDB exporter image tag                                                                   | `v20200630`                                 |
 | `metrics.image.pullPolicy`              | Image pull policy                                                                            | `IfNotPresent`                              |
 | `metrics.image.pullSecrets`             | Specify docker-registry secret names as an array                                             | `nil`                                       |
 | `metrics.podAnnotations`                | Additional annotations for Metrics exporter pod                                              | {}                                          |
-| `metrics.resources`                     | Exporter resource requests/limit                                                             | Memory: `256Mi`, CPU: `100m`             |
+| `metrics.resources`                     | Exporter resource requests/limit                                                             | Memory: `256Mi`, CPU: `100m`                |
 | `metrics.serviceMonitor.enabled`        | Create ServiceMonitor Resource for scraping metrics using PrometheusOperator                 | `false`                                     |
 | `metrics.serviceMonitor.additionalLabels`          | Used to pass Labels that are required by the Installed Prometheus Operator        | {}                                          |
 | `metrics.serviceMonitor.relabellings`              | Specify Metric Relabellings to add to the scrape endpoint                         | `nil`                                       |
 | `metrics.serviceMonitor.alerting.rules`            | Define individual alerting rules as required                                      | {}                                          |
 | `metrics.serviceMonitor.alerting.additionalLabels` | Used to pass Labels that are required by the Installed Prometheus Operator        | {}                                          |
 
-
-Specify each parameter using the `--set key=value[,key=value]` argument to `helm install`. For example,
-
-```bash
-$ helm install --name my-release \
-  --set mongodbRootPassword=secretpassword,mongodbUsername=my-user,mongodbPassword=my-password,mongodbDatabase=my-database \
-    stable/mongodb
-```
-
-The above command sets the MongoDB `root` account password to `secretpassword`. Additionally, it creates a standard database user named `my-user`, with the password `my-password`, who has access to a database named `my-database`.
-
-Alternatively, a YAML file that specifies the values for the parameters can be provided while installing the chart. For example,
-
-```bash
-$ helm install --name my-release -f values.yaml stable/mongodb
-```
-
-> **Tip**: You can use the default [values.yaml](values.yaml)
 
 ## Replication
 
