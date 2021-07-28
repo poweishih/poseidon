@@ -34,6 +34,7 @@ When configured for Backups to S3:
 The following table lists the configurable parameters of the TimescaleDB Helm chart and their default values.
 
 ### - Simple create service parameters
+
 |       Parameter                   |           Description                       |                         Default                     |
 |-----------------------------------|---------------------------------------------|-----------------------------------------------------|
 | `global.imageRegistry`            | Global Docker image registry                | By Poseidon Service Setting                         |
