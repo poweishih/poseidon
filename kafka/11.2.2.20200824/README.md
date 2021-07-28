@@ -20,7 +20,8 @@ This helm chart was customization by Poseidom Team.
 
 The following tables lists the configurable parameters of the Kafka chart and their default values per section/component:
 
-### - Poseidon create service parameters
+### - Simple create service parameters
+
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
 | `global.imageRegistry`                            | Global Docker image registry                                                                                                      | By Poseidon Service Setting                             |

@@ -8,7 +8,7 @@ https://github.com/rancher/charts
 
 # LH私有倉庫   
 
-10.134.200.110:5000   
+10.57.241.229:5000
 
 # 步驟
 

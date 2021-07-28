@@ -21,7 +21,8 @@ This helm chart was customization by Poseidom Team.
 The following table lists the configurable parameters of the RabbitMQ chart
 and their default values.
 
-### - Poseidon create service parameters
+### - Simple create service parameters
+
 | Parameter                                          | Description                                                                                                                                                                                           | Default                                                                                             |
 | -------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
 | `global.imageRegistry`                             | Global Docker image registry                                                                                                                                                                          | By Poseidon Service Setting                                                                         |
