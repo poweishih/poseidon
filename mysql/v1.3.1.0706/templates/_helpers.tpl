@@ -30,3 +30,63 @@ Generate chart secret name
 {{- define "mysql.secretName" -}}
 {{ default (include "mysql.fullname" .) .Values.existingSecret }}
 {{- end -}}
+
+{{/*
+==== Image path config ====
+*/}}
+
+{{/*
+Return the proper MySQL image name
+*/}}
+{{- define "mysql.image" -}}
+{{- $repositoryName := .Values.image -}}
+{{- $tag := .Values.imageTag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper Busybox image name
+*/}}
+{{- define "mysql.busybox.image" -}}
+{{- $repositoryName := .Values.busybox.image -}}
+{{- $tag := .Values.busybox.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper Metric image name
+*/}}
+{{- define "mysql.metrics.image" -}}
+{{- $repositoryName := .Values.metrics.image -}}
+{{- $tag := .Values.metrics.imageTag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the proper testFramework image name
+*/}}
+{{- define "mysql.testframework.image" -}}
+{{- $repositoryName := .Values.testframework.image -}}
+{{- $tag := .Values.testframework.tag | toString -}}
+{{- if .Values.global.imageRegistry }}
+    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
+{{- else -}}
+    {{- printf "%s:%s" $repositoryName $tag -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+===========================
+*/}}

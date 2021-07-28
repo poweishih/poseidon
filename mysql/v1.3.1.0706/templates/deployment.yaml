@@ -46,7 +46,7 @@ spec:
       {{- end }}
       initContainers:
       - name: "remove-lost-found"
-        image: "{{ .Values.busybox.image}}:{{ .Values.busybox.tag }}"
+        image: {{ include "mysql.busybox.image" . }}
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
         resources:
 {{ toYaml .Values.initContainer.resources | indent 10 }}
@@ -70,7 +70,7 @@ spec:
       {{- end }}
       containers:
       - name: {{ template "mysql.fullname" . }}
-        image: "{{ .Values.image }}:{{ .Values.imageTag }}"
+        image: {{ include "mysql.image" . }}
         imagePullPolicy: {{ .Values.imagePullPolicy | quote }}
 
         {{- with .Values.args }}
@@ -171,7 +171,7 @@ spec:
         {{- end }}
       {{- if .Values.metrics.enabled }}
       - name: metrics
-        image: "{{ .Values.metrics.image }}:{{ .Values.metrics.imageTag }}"
+        image: {{ include "mysql.metrics.image" . }}
         imagePullPolicy: {{ .Values.metrics.imagePullPolicy | quote }}
         {{- if .Values.mysqlAllowEmptyPassword }}
         command:
