@@ -27,6 +27,7 @@ The following tables lists the configurable parameters of the Kafka chart and th
 | `global.imageRegistry`                            | Global Docker image registry                                                                                                      | By Poseidon Service Setting                             |
 | `logRetentionHours`                               | The minimum age of a log file to be eligible for deletion due to age                                                              | `168`                                                   |
 | `replicaCount`                                    | Number of Kafka nodes                                                                                                             | `3`                                                     |
+| `zookeeper.enabled`                               | Switch to enable or disable the Zookeeper helm chart                                                                              | `true`                                                  |
 | `zookeeper.replicaCount`                          | Number of Zookeeper nodes                                                                                                         | `3`                                                     |
 
 ### - Other parameters
@@ -235,7 +236,6 @@ The following tables lists the configurable parameters of the Kafka chart and th
 
 | Parameter                                         | Description                                                                                                                       | Default                                                 |
 |---------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|
-| `zookeeper.enabled`                               | Switch to enable or disable the Zookeeper helm chart                                                                              | `true`                                                  |
 | `zookeeper.persistence.enabled`                   | Enable Zookeeper persistence using PVC                                                                                            | `true`                                                  |
 | `externalZookeeper.servers`                       | Server or list of external Zookeeper servers to use                                                                               | `[]`                                                    |
 
