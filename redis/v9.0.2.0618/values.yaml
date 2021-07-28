@@ -232,11 +232,10 @@ master:
   ## ref: http://kubernetes.io/docs/user-guide/compute-resources/
   resources:
     requests:
-      memory: 4096Mi
-      cpu: 2000m
-    limits:
-      memory: 4096Mi
-      cpu: 2000m
+      memory: 256Mi
+      cpu: 100m
+
+    limits: {}
   ## Use an alternate scheduler, e.g. "stork".
   ## ref: https://kubernetes.io/docs/tasks/administer-cluster/configure-multiple-schedulers/
   ##
@@ -386,12 +385,9 @@ slave:
 
   ## Redis slave Resource
   resources:
-    requests:
-      memory: 4096Mi
-      cpu: 2000m
-    limits:
-      memory: 4096Mi
-      cpu: 2000m
+    requests: {}
+
+    limits: {}
 
   ## Redis slave selectors and tolerations for pod assignment
   # nodeSelector: {"beta.kubernetes.io/arch": "amd64"}
