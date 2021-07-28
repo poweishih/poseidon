@@ -75,18 +75,5 @@ Return the proper Metric image name
 {{- end -}}
 
 {{/*
-Return the proper testFramework image name
-*/}}
-{{- define "mysql.testframework.image" -}}
-{{- $repositoryName := .Values.testframework.image -}}
-{{- $tag := .Values.testframework.tag | toString -}}
-{{- if .Values.global.imageRegistry }}
-    {{- printf "%s/%s:%s" .Values.global.imageRegistry $repositoryName $tag -}}
-{{- else -}}
-    {{- printf "%s:%s" $repositoryName $tag -}}
-{{- end -}}
-{{- end -}}
-
-{{/*
 ===========================
 */}}
