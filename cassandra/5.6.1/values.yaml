@@ -3,7 +3,7 @@
 ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
 global:
-  imageRegistry: 10.57.241.229:5000
+  imageRegistry: "10.57.241.229:5000"
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
 #   storageClass: myStorageClass

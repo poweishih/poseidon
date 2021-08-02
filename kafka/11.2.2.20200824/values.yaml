@@ -4,7 +4,7 @@
 ##
 global:
   imageRegistryEnable: false
-  imageRegistry: 10.57.241.229:5000
+  imageRegistry: "10.57.241.229:5000"
   # imagePullSecrets:
   #   - myRegistryKeySecretName
   # storageClass: myStorageClass

@@ -2,7 +2,7 @@
 ## ref: https://hub.docker.com/r/library/mysql/tags/
 ##
 global:
-  imageRegistry: 10.57.241.229:5000
+  imageRegistry: "10.57.241.229:5000"
 
 image: "mysql"
 imageTag: "5.7.29"
