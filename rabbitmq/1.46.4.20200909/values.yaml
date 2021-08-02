@@ -1,6 +1,6 @@
 global:
   imageRegistryEnable: false
-  imageRegistry:
+  imageRegistry: 10.57.241.229:5000
 ## RabbitMQ application credentials
 ## Ref: http://rabbitmq.com/access-control.html
 ##
