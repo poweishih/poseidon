@@ -209,7 +209,7 @@ jvm:
 dbUser:
   user: cassandra
   forcePassword: true
-  # password:
+  password:
   # existingSecret:
 
 ## ConfigMap with cql scripts. Useful for creating a keyspace
