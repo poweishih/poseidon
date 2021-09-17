@@ -48,6 +48,7 @@ Labels to use on deploy.spec.selector.matchLabels and svc.spec.selector
 {{- define "kafka.matchLabels" -}}
 app.kubernetes.io/name: {{ include "kafka.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*

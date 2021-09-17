@@ -133,6 +133,7 @@ Labels to use on deploy.spec.selector.matchLabels and svc.spec.selector
 {{- define "zookeeper.matchLabels" -}}
 app.kubernetes.io/name: {{ include "zookeeper.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
+release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
