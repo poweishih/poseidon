@@ -39,6 +39,7 @@ app.kubernetes.io/name: {{ include "kafka.name" . }}
 helm.sh/chart: {{ include "kafka.chart" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/managed-by: {{ .Release.Service }}
+release: {{ .Release.Name }}
 {{- end -}}
 
 {{/*
