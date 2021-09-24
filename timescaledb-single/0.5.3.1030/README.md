@@ -104,7 +104,7 @@ my-release   LoadBalancer   10.100.149.189    verylongname.example.com   5432:31
 ```
 
 Using the External IP for the service (which will route through the LoadBalancer to the Master), you
-can connect via `psql` using the following (default example superuser password is `tea`)
+can connect via `psql` using the following (default example superuser password is `admin`)
 
 > NOTICE: You may have to wait a few minutes before you can resolve the DNS record
 
