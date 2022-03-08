@@ -3,7 +3,7 @@
 ## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
 global:
-  imageRegistry: "10.57.241.229:5000"
+  imageRegistry: "chart.dct-tb.mtjade.cloud/poseidon-managed"
 #   imagePullSecrets:
 #     - myRegistryKeySecretName
 #   storageClass: myStorageClass

@@ -2,7 +2,7 @@
 ## Please, note that this will override the image registry for all the images, including dependencies, configured to use the global value
 ##
 global:
-  imageRegistry: "10.57.241.229:5000"
+  imageRegistry: "chart.dct-tb.mtjade.cloud/poseidon-managed"
 
 image:
   ## Bitnami MongoDB image name
