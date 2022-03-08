@@ -9,7 +9,7 @@ keywords:
 - database
 - sql
 home: https://www.mysql.com/
-icon: file://../logo-mysql.png
+icon: file://logo-mysql.png
 sources:
 - https://github.com/kubernetes/charts
 - https://github.com/docker-library/mysql

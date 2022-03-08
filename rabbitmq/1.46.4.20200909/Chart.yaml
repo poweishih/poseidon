@@ -12,7 +12,7 @@ keywords:
 - MQTT
 - STOMP
 home: https://www.rabbitmq.com
-icon: file://../logo-rabbitmq.png
+icon: file://logo-rabbitmq.png
 sources:
 - https://github.com/rabbitmq/rabbitmq
 - https://github.com/docker-library/rabbitmq

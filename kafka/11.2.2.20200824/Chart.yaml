@@ -10,7 +10,7 @@ keywords:
   - producer
   - consumer
 home: https://kafka.apache.org/
-icon: file://../logo-kafka.png
+icon: file://logo-kafka.png
 sources:
   - https://github.com/bitnami/bitnami-docker-kafka
 maintainers:

@@ -11,7 +11,7 @@ version: 0.5.3.1030
 # To avoid confusion, we will not expose appVersion
 # appVersion: 0.0.1
 home: https://github.com/timescale/timescaledb-kubernetes
-icon: file://../logo-timescaledb.png
+icon: file://logo-timescaledb.png
 sources:
 - https://github.com/timescale/timescaledb-kubernetes
 - https://github.com/timescale/timescaledb-docker-ha
