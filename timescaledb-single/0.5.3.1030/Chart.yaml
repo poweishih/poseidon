@@ -2,9 +2,9 @@
 # Please see the included NOTICE for copyright information and LICENSE for a copy of the license.
 
 apiVersion: v1
-name: timescaledb-single
-description: 'TimescaleDB HA Deployment.'
-version: 0.5.3.1030
+name: timescaledb
+description: 'TimescaleDB Deployment.'
+version: 0.5.3
 # appVersion specifies the version of the software, which can vary wildly,
 # e.g. TimescaleDB 1.4.1 on PostgreSQL 11 or TimescaleDB 1.5.0 on PostgreSQL 12.
 # https://github.com/helm/helm/blob/master/docs/charts.md#the-appversion-field
