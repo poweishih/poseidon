@@ -1,6 +1,6 @@
 global:
   imageRegistryEnable: false
-  imageRegistry: "chart.dct-tb.mtjade.cloud/poseidon-managed"
+  imageRegistry: "10.20.208.139/poseidon-managed"
 ## RabbitMQ application credentials
 ## Ref: http://rabbitmq.com/access-control.html
 ##

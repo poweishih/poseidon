@@ -4,7 +4,7 @@
 ##
 global:
   imageRegistryEnable: false
-  imageRegistry: "chart.dct-tb.mtjade.cloud/poseidon-managed"
+  imageRegistry: "10.20.208.139/poseidon-managed"
   # imagePullSecrets:
   #   - myRegistryKeySecretName
   # storageClass: myStorageClass

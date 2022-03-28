@@ -2,7 +2,7 @@
 ## ref: https://hub.docker.com/r/library/mysql/tags/
 ##
 global:
-  imageRegistry: "chart.dct-tb.mtjade.cloud/poseidon-managed"
+  imageRegistry: "10.20.208.139/poseidon-managed"
 
 image: "mysql"
 imageTag: "5.7.29"
